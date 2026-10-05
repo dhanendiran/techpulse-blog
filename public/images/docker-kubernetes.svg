@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="dk-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" rx="16" fill="url(#dk-grad)"/>
+  <circle cx="700" cy="100" r="140" fill="#38bdf8" opacity="0.2"/>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#7dd3fc" letter-spacing="2">DEVOPS ARCHITECTURE</text>
+  <text x="60" y="210" font-family="system-ui, sans-serif" font-size="38" font-weight="800" fill="#ffffff">Docker Compose vs Kubernetes</text>
+  <text x="60" y="260" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#bae6fd">The Solo Developer's Guide to Pragmatic Infrastructure</text>
+  <rect x="60" y="300" width="160" height="40" rx="8" fill="#0369a1"/>
+  <text x="75" y="326" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">ZERO OVERHEAD</text>
+</svg>

@@ -1,6 +1,11 @@
 
 export default new Map([
 ["src/content/blog/best-cloud-hosting-platforms-for-developers.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fbest-cloud-hosting-platforms-for-developers.mdx&astroContentModuleFlag=true")],
+["src/content/blog/best-developer-laptops-2026.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fbest-developer-laptops-2026.mdx&astroContentModuleFlag=true")],
+["src/content/blog/best-managed-postgres-databases-2026.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fbest-managed-postgres-databases-2026.mdx&astroContentModuleFlag=true")],
+["src/content/blog/docker-vs-kubernetes-solo-developers.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fdocker-vs-kubernetes-solo-developers.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/how-to-build-autonomous-ai-agents.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fhow-to-build-autonomous-ai-agents.mdx&astroContentModuleFlag=true")],
-["src/content/blog/top-ai-coding-assistants-2026.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftop-ai-coding-assistants-2026.mdx&astroContentModuleFlag=true")]]);
+["src/content/blog/monetize-open-source-software-2026.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fmonetize-open-source-software-2026.mdx&astroContentModuleFlag=true")],
+["src/content/blog/top-ai-coding-assistants-2026.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftop-ai-coding-assistants-2026.mdx&astroContentModuleFlag=true")],
+["src/content/blog/top-ai-video-generators-2026.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Ftop-ai-video-generators-2026.mdx&astroContentModuleFlag=true")]]);
 		

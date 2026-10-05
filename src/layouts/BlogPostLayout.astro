@@ -4,12 +4,23 @@ import BaseLayout from './BaseLayout.astro';
 import AdBanner from '../components/AdBanner.astro';
 import AffiliateNotice from '../components/AffiliateNotice.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import ReadingProgressBar from '../components/ReadingProgressBar.astro';
+import SocialShare from '../components/SocialShare.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  headings?: Heading[];
 }
 
-const { post } = Astro.props;
+const { post, headings = [] } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, author, authorRole, category, readingTime, hasAffiliateLinks } = post.data;
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -29,6 +40,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   author={author}
   category={category}
 >
+  <ReadingProgressBar />
+
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <!-- Breadcrumbs -->
     <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6">
@@ -84,10 +97,16 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     <!-- FTC Affiliate Notice (if monetized with affiliate links) -->
     {hasAffiliateLinks && <AffiliateNotice />}
 
+    <!-- Table of Contents -->
+    <TableOfContents headings={headings} />
+
     <!-- Post Content -->
     <div class="prose prose-slate max-w-none mx-auto py-4">
       <slot />
     </div>
+
+    <!-- Social Share Buttons -->
+    <SocialShare title={title} />
 
     <!-- Mid/Bottom In-Article Display Ad Unit -->
     <AdBanner slot="article-bottom-banner" format="auto" label="Advertisement" />
@@ -111,6 +130,9 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         </div>
       </div>
     </div>
+
+    <!-- Related Next Reads -->
+    <RelatedPosts currentPostId={post.id} category={category} />
 
     <!-- Newsletter Opt-in Lead Magnet -->
     <NewsletterCTA />

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="pg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#336791"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" rx="16" fill="url(#pg-grad)"/>
+  <circle cx="700" cy="100" r="140" fill="#336791" opacity="0.4"/>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#93c5fd" letter-spacing="2">DATABASE BENCHMARKS</text>
+  <text x="60" y="210" font-family="system-ui, sans-serif" font-size="38" font-weight="800" fill="#ffffff">Top Managed PostgreSQL Services</text>
+  <text x="60" y="260" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#bfdbfe">Supabase vs Neon vs AWS RDS vs Tembo</text>
+  <rect x="60" y="300" width="160" height="40" rx="8" fill="#2563eb"/>
+  <text x="75" y="326" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">IOPS &amp; PRICING</text>
+</svg>

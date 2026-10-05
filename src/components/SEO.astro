@@ -21,6 +21,11 @@ const {
   category,
 } = Astro.props;
 
+// Analytics & Webmaster Verification (Fill these in when ready)
+const GA4_ID = ''; // Insert your Google Analytics 4 ID: 'G-XXXXXXXXXX'
+const GOOGLE_VERIFICATION_TOKEN = ''; // Insert your Google Search Console token
+const ADSENSE_ACCOUNT_ID = ''; // e.g. 'ca-pub-XXXXXXXXXXXXXXXX' for Auto-Ads verification
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://techpulse.dev');
 const imageURL = new URL(image, Astro.site || 'https://techpulse.dev');
 
@@ -104,8 +109,25 @@ const schema = article
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageURL} />
 
+<!-- Google Search Console & AdSense Verification -->
+{GOOGLE_VERIFICATION_TOKEN && <meta name="google-site-verification" content={GOOGLE_VERIFICATION_TOKEN} />}
+{ADSENSE_ACCOUNT_ID && <meta name="google-adsense-account" content={ADSENSE_ACCOUNT_ID} />}
+
 <!-- RSS Feed Auto-discovery -->
 <link rel="alternate" type="application/rss+xml" title="TechPulse RSS Feed" href="/rss.xml" />
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<!-- Google Analytics 4 (Only loaded when GA4_ID is configured) -->
+{GA4_ID && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+    <script is:inline define:vars={{ GA4_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA4_ID);
+    </script>
+  </>
+)}

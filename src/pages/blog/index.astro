@@ -17,7 +17,7 @@ const categories = Array.from(new Set(allPosts.map((p) => p.data.category)));
 >
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header -->
-    <div class="text-center max-w-2xl mx-auto mb-12">
+    <div class="text-center max-w-2xl mx-auto mb-10">
       <span class="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
         Knowledge Base
       </span>
@@ -28,15 +28,37 @@ const categories = Array.from(new Set(allPosts.map((p) => p.data.category)));
         Filter through our actionable teardowns, benchmarks, and monetization playbooks.
       </p>
 
+      <!-- Live Search Bar -->
+      <div class="mt-8 max-w-md mx-auto relative">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+          </svg>
+        </div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by topic, tool or keyword (e.g. Cursor, Hetzner, Agents)..."
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-xs transition-all"
+        />
+      </div>
+
       <!-- Category Filter Pills -->
-      <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
-        <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 text-white cursor-pointer">
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-5" id="category-filters">
+        <button
+          data-category="all"
+          class="cat-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 text-white cursor-pointer transition-colors shadow-xs"
+        >
           All ({allPosts.length})
-        </span>
+        </button>
         {categories.map((cat) => (
-          <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-700 hover:border-sky-300 hover:text-sky-600 transition-colors cursor-pointer">
+          <button
+            data-category={cat}
+            class="cat-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-700 hover:border-sky-300 hover:text-sky-600 transition-colors cursor-pointer"
+          >
             {cat}
-          </span>
+          </button>
         ))}
       </div>
     </div>
@@ -45,13 +67,79 @@ const categories = Array.from(new Set(allPosts.map((p) => p.data.category)));
     <AdBanner slot="archive-top-banner" label="Advertisement" />
 
     <!-- Articles Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
+    <div id="posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
       {sortedPosts.map((post) => (
-        <PostCard post={post} />
+        <div
+          class="post-item"
+          data-title={post.data.title.toLowerCase()}
+          data-description={post.data.description.toLowerCase()}
+          data-category={post.data.category}
+          data-tags={post.data.tags.join(' ').toLowerCase()}
+        >
+          <PostCard post={post} />
+        </div>
       ))}
+    </div>
+
+    <!-- No Results Placeholder -->
+    <div id="no-results" class="hidden text-center py-16">
+      <div class="text-4xl mb-3">🔍</div>
+      <h3 class="text-lg font-bold text-slate-800 mb-1">No articles found</h3>
+      <p class="text-xs text-slate-500">Try adjusting your search keywords or clear your filter.</p>
     </div>
 
     <!-- Newsletter CTA -->
     <NewsletterCTA />
   </div>
 </BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+  const postItems = document.querySelectorAll<HTMLElement>('.post-item');
+  const catButtons = document.querySelectorAll<HTMLButtonElement>('.cat-filter-btn');
+  const noResults = document.getElementById('no-results');
+
+  let activeCategory = 'all';
+
+  function filterPosts() {
+    const query = searchInput?.value.toLowerCase().trim() || '';
+    let visibleCount = 0;
+
+    postItems.forEach((item) => {
+      const title = item.dataset.title || '';
+      const desc = item.dataset.description || '';
+      const tags = item.dataset.tags || '';
+      const category = item.dataset.category || '';
+
+      const matchesQuery = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
+      const matchesCategory = activeCategory === 'all' || category === activeCategory;
+
+      if (matchesQuery && matchesCategory) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('hidden', visibleCount > 0);
+    }
+  }
+
+  searchInput?.addEventListener('input', filterPosts);
+
+  catButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      catButtons.forEach((b) => {
+        b.classList.remove('bg-slate-900', 'text-white', 'font-bold');
+        b.classList.add('bg-white', 'text-slate-700', 'font-medium');
+      });
+      btn.classList.remove('bg-white', 'text-slate-700', 'font-medium');
+      btn.classList.add('bg-slate-900', 'text-white', 'font-bold');
+
+      activeCategory = btn.dataset.category || 'all';
+      filterPosts();
+    });
+  });
+</script>
