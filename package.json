@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build && cp dist/sitemap-0.xml dist/sitemap.xml",
     "preview": "astro preview",
-    "new-post": "node scripts/new-post.js"
+    "new-post": "node scripts/new-post.js",
+    "broadcast": "node scripts/broadcast-post.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",
@@ -16,6 +17,10 @@
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
+    "resend": "^6.32.0",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@vercel/node": "^20.0.0"
   }
 }

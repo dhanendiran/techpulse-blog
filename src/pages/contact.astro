@@ -124,15 +124,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     if (!form || !submitBtn || !successBox) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (btnText) btnText.textContent = 'Sending...';
       submitBtn.disabled = true;
 
+      const formData = new FormData(form);
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+      };
+
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } catch (_) {}
+
       setTimeout(() => {
         form.classList.add('hidden');
         successBox.classList.remove('hidden');
-      }, 500);
+      }, 400);
     });
   }
 

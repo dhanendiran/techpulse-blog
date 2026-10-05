@@ -133,9 +133,16 @@ const {
           localStorage.setItem('techpulse_subscribers_list', JSON.stringify(subscribers));
         }
 
-        // Forward to external webhook or serverless endpoint if configured
+        // Dispatch to automated /api/subscribe serverless endpoint
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        }).catch(() => {});
+
+        // Optional external webhook fallback
         const endpoint = (window as any).__TECHPULSE_NEWSLETTER_ENDPOINT__;
-        if (endpoint) {
+        if (endpoint && endpoint !== '/api/subscribe') {
           await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
