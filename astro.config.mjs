@@ -5,7 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://techpulse.dev', // Replace with your production domain
+  site: process.env.SITE_URL || 'https://techpulse.dev',
+  base: process.env.BASE_PATH || '/',
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
