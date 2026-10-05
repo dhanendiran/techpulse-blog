@@ -26,8 +26,8 @@ const GA4_ID = ''; // Insert your Google Analytics 4 ID: 'G-XXXXXXXXXX'
 const GOOGLE_VERIFICATION_TOKEN = ''; // Insert your Google Search Console token
 const ADSENSE_ACCOUNT_ID = 'ca-pub-8361745863380313'; // Official Google AdSense Account ID
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://techpulse.dev');
-const imageURL = new URL(image, Astro.site || 'https://techpulse.dev');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://techpulse-blog-beta.vercel.app');
+const imageURL = new URL(image, Astro.site || 'https://techpulse-blog-beta.vercel.app');
 
 const siteTitle = 'TechPulse | AI, Software & Engineering Insights';
 const fullTitle = title === siteTitle ? title : `${title} | TechPulse`;
@@ -45,15 +45,15 @@ const schema = article
       author: {
         '@type': 'Person',
         name: author,
-        url: new URL('/about', Astro.site || 'https://techpulse.dev').href,
+        url: new URL('/about', Astro.site || 'https://techpulse-blog-beta.vercel.app').href,
       },
       publisher: {
         '@type': 'Organization',
         name: 'TechPulse',
-        url: Astro.site?.toString() || 'https://techpulse.dev',
+        url: Astro.site?.toString() || 'https://techpulse-blog-beta.vercel.app',
         logo: {
           '@type': 'ImageObject',
-          url: new URL('/images/logo.svg', Astro.site || 'https://techpulse.dev').href,
+          url: new URL('/images/logo.svg', Astro.site || 'https://techpulse-blog-beta.vercel.app').href,
         },
       },
       mainEntityOfPage: {
@@ -66,7 +66,7 @@ const schema = article
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'TechPulse',
-      url: Astro.site?.toString() || 'https://techpulse.dev',
+      url: Astro.site?.toString() || 'https://techpulse-blog-beta.vercel.app',
       description: description,
       publisher: {
         '@type': 'Organization',

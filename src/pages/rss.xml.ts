@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'TechPulse - AI, Engineering & Cloud Benchmarks',
     description: 'Unbiased benchmarks, autonomous AI tool comparisons, and guides for developers.',
-    site: context.site || 'https://techpulse.dev',
+    site: context.site || 'https://techpulse-blog-beta.vercel.app',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.pubDate,
