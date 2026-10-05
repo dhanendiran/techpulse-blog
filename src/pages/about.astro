@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+---
+
+<BaseLayout
+  title="About TechPulse & Editorial Team"
+  description="Learn about the engineering standards, testing methodologies, and editorial team behind TechPulse."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
+        Our Mission
+      </span>
+      <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mt-3 mb-4">
+        Engineering-First Tech Analysis
+      </h1>
+      <p class="text-slate-600 text-base leading-relaxed">
+        TechPulse was founded to cut through marketing fluff and deliver reproducible, data-driven software evaluations.
+      </p>
+    </div>
+
+    <!-- Editorial Principles (E-E-A-T) -->
+    <div class="prose prose-slate max-w-none">
+      <h2>Who We Are</h2>
+      <p>
+        Founded by <strong>Dhanendiran M</strong>, an AI Engineer and Full-Stack Systems Developer, TechPulse is an independent publication dedicated to autonomous software engineering, cloud architectures, and developer tooling.
+      </p>
+
+      <h2>Our Testing Methodology</h2>
+      <p>
+        Unlike content farms that rephrase vendor marketing copy, our evaluations adhere to strict technical standards:
+      </p>
+      <ul>
+        <li><strong>Hands-on Benchmarking:</strong> Every software, framework, and AI tool reviewed is deployed in real-world scenarios across production environments.</li>
+        <li><strong>Zero Paid Editorial Bias:</strong> We never accept payment to give a positive review. If a tool has bugs, slow latency, or opaque pricing, we document it explicitly.</li>
+        <li><strong>Editorial Independence:</strong> While we participate in affiliate partnerships to fund our infrastructure and testing labs, affiliate relationships never dictate our rankings or conclusions.</li>
+      </ul>
+
+      <h2>E-E-A-T Compliance & Integrity</h2>
+      <p>
+        Google's Search Quality Evaluator Guidelines emphasize Experience, Expertise, Authoritativeness, and Trustworthiness (E-E-A-T). We uphold these principles by:
+      </p>
+      <ol>
+        <li>Attributing every article to a verified technical contributor.</li>
+        <li>Providing raw benchmark scripts and reproducible code snippets.</li>
+        <li>Maintaining open contact channels for corrections and community audits.</li>
+      </ol>
+
+      <h2>Get In Touch</h2>
+      <p>
+        Have a technical inquiry, want to propose a benchmark, or need to report an erratum? Reach out through our <a href="/contact">contact page</a> or email us at <code>editorial@techpulse.dev</code>.
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <NewsletterCTA />
+    </div>
+  </div>
+</BaseLayout>

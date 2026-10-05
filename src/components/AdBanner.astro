@@ -1,0 +1,68 @@
+---
+interface Props {
+  slot?: string;
+  format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal';
+  layoutKey?: string;
+  label?: string;
+  className?: string;
+}
+
+const {
+  slot = '1234567890',
+  format = 'auto',
+  layoutKey,
+  label = 'Advertisement',
+  className = '',
+} = Astro.props;
+
+// Replace this with your Google AdSense Publisher ID (e.g. 'ca-pub-1234567890123456')
+// When empty or left as default, an elegant placeholder is shown so your layout doesn't break
+const ADSENSE_CLIENT_ID = ''; // Set your ca-pub-XXXXX here when approved!
+const isProductionAd = Boolean(ADSENSE_CLIENT_ID && ADSENSE_CLIENT_ID !== 'ca-pub-XXXXXXXXXXXXXXXX');
+---
+
+<div class={`my-8 mx-auto text-center ${className}`}>
+  <div class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-1">
+    {label}
+  </div>
+
+  <div class="min-h-[100px] sm:min-h-[250px] w-full flex items-center justify-center bg-slate-50 border border-dashed border-slate-300 rounded-xl overflow-hidden relative transition-all">
+    {isProductionAd ? (
+      <>
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+          crossorigin="anonymous"
+        ></script>
+        <ins
+          class="adsbygoogle"
+          style="display:block; width:100%;"
+          data-ad-client={ADSENSE_CLIENT_ID}
+          data-ad-slot={slot}
+          data-ad-format={format}
+          data-full-width-responsive="true"
+          {...(layoutKey ? { 'data-ad-layout-key': layoutKey } : {})}
+        ></ins>
+        <script is:inline>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </>
+    ) : (
+      <div class="p-6 flex flex-col items-center justify-center text-slate-400">
+        <div class="flex items-center gap-2 mb-1">
+          <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+          <span class="font-semibold text-xs tracking-wider uppercase text-slate-600">Google AdSense Unit</span>
+        </div>
+        <p class="text-xs text-slate-500 max-w-sm">
+          Slot ID: <code class="bg-slate-200 text-slate-700 px-1 py-0.5 rounded">{slot}</code> | Format: {format}
+        </p>
+        <p class="text-[11px] text-slate-400 mt-1">
+          (Insert your AdSense publisher ID in <code>AdBanner.astro</code> to activate live ads)
+        </p>
+      </div>
+    )}
+  </div>
+</div>

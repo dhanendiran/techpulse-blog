@@ -1,0 +1,75 @@
+---
+interface Item {
+  name: string;
+  badge?: string;
+  rating: string;
+  bestFor: string;
+  pricing: string;
+  link: string;
+  ctaText?: string;
+}
+
+interface Props {
+  title?: string;
+  items: Item[];
+}
+
+const { title = 'Quick Comparison Summary', items = [] } = Astro.props;
+---
+
+<div class="my-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+  {title && (
+    <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+      <h3 class="text-base font-bold text-slate-800 m-0">{title}</h3>
+    </div>
+  )}
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-slate-200 bg-slate-50/50 text-xs uppercase tracking-wider text-slate-500">
+          <th class="py-3.5 px-4 font-semibold">Software / Tool</th>
+          <th class="py-3.5 px-4 font-semibold">Rating</th>
+          <th class="py-3.5 px-4 font-semibold">Best For</th>
+          <th class="py-3.5 px-4 font-semibold">Pricing</th>
+          <th class="py-3.5 px-4 font-semibold text-right">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        {items.map((item, index) => (
+          <tr class={index === 0 ? 'bg-sky-50/30' : 'hover:bg-slate-50/60'}>
+            <td class="py-4 px-4 font-semibold text-slate-900">
+              <div class="flex items-center gap-2">
+                <span>{item.name}</span>
+                {item.badge && (
+                  <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 border border-sky-200">
+                    {item.badge}
+                  </span>
+                )}
+              </div>
+            </td>
+            <td class="py-4 px-4 font-medium text-slate-700">
+              <span class="text-amber-500 font-bold">★</span> {item.rating}
+            </td>
+            <td class="py-4 px-4 text-slate-600">
+              {item.bestFor}
+            </td>
+            <td class="py-4 px-4 font-semibold text-emerald-600">
+              {item.pricing}
+            </td>
+            <td class="py-4 px-4 text-right">
+              <a
+                href={item.link}
+                target="_blank"
+                rel="sponsored nofollow noopener"
+                class="inline-block px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-700 text-white transition-colors"
+              >
+                {item.ctaText || 'Visit Site'} →
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

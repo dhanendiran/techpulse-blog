@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="ai-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" rx="16" fill="url(#ai-grad)"/>
+  <circle cx="700" cy="100" r="150" fill="#6366f1" opacity="0.2"/>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#818cf8" letter-spacing="2">BENCHMARK REPORT</text>
+  <text x="60" y="210" font-family="system-ui, sans-serif" font-size="38" font-weight="800" fill="#ffffff">Top AI Coding Assistants (2026)</text>
+  <text x="60" y="260" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#c7d2fe">Cursor vs Copilot vs Windsurf vs Claude Code</text>
+  <rect x="60" y="300" width="160" height="40" rx="8" fill="#4f46e5"/>
+  <text x="85" y="326" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">5,000 LOC TESTED</text>
+</svg>

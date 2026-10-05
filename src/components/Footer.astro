@@ -1,0 +1,65 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-slate-900 text-slate-400 mt-auto border-t border-slate-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand & Mission -->
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center text-white font-bold text-lg">
+            ⚡
+          </div>
+          <span class="font-bold text-xl text-white">TechPulse</span>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed mb-4">
+          Unbiased engineering benchmarks, autonomous AI workflows, and software tooling teardowns for forward-thinking developers.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-3">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/blog" class="hover:text-white transition-colors">All Articles</a></li>
+          <li><a href="/about" class="hover:text-white transition-colors">About Dhanendiran</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">Contact Editorial</a></li>
+          <li><a href="/rss.xml" class="hover:text-white transition-colors">RSS Feed</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-3">Topics</h3>
+        <ul class="space-y-2 text-sm">
+          <li><span class="text-slate-300">Artificial Intelligence</span></li>
+          <li><span class="text-slate-300">Software Architecture</span></li>
+          <li><span class="text-slate-300">Cloud & DevOps</span></li>
+          <li><span class="text-slate-300">Developer Tooling</span></li>
+        </ul>
+      </div>
+
+      <!-- Legal & Trust (AdSense / Affiliate Mandatory) -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-3">Trust & Legal</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+          <li><a href="/affiliate-disclosure" class="hover:text-white transition-colors">Affiliate Disclosure</a></li>
+          <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Disclaimer & Copyright -->
+    <div class="border-t border-slate-800 mt-10 pt-6 text-xs text-slate-500 space-y-3">
+      <p>
+        <strong class="text-slate-400">Affiliate Disclaimer:</strong> TechPulse participates in various affiliate marketing programs, which means we may get paid commissions on editorially chosen products purchased through our links to retailer sites at no additional cost to you.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+        <p>© {currentYear} TechPulse. All rights reserved.</p>
+        <p>Built with Astro & Tailwind CSS for maximum Core Web Vitals speed.</p>
+      </div>
+    </div>
+  </div>
+</footer>

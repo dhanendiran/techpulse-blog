@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import AdBanner from '../../components/AdBanner.astro';
+import NewsletterCTA from '../../components/NewsletterCTA.astro';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categories = Array.from(new Set(allPosts.map((p) => p.data.category)));
+---
+
+<BaseLayout
+  title="All Articles & Guides | TechPulse"
+  description="Explore our full library of technical tutorials, software benchmarks, and autonomous AI system design blueprints."
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
+        Knowledge Base
+      </span>
+      <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mt-3 mb-4">
+        Engineering & Software Articles
+      </h1>
+      <p class="text-slate-600 text-base leading-relaxed">
+        Filter through our actionable teardowns, benchmarks, and monetization playbooks.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
+        <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 text-white cursor-pointer">
+          All ({allPosts.length})
+        </span>
+        {categories.map((cat) => (
+          <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-700 hover:border-sky-300 hover:text-sky-600 transition-colors cursor-pointer">
+            {cat}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Ad Unit -->
+    <AdBanner slot="archive-top-banner" label="Advertisement" />
+
+    <!-- Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
+      {sortedPosts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    <!-- Newsletter CTA -->
+    <NewsletterCTA />
+  </div>
+</BaseLayout>

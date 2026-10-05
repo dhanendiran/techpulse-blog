@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact TechPulse Editorial Team"
+  description="Get in touch with TechPulse for technical inquiries, editorial corrections, software review submissions, and advertising partnerships."
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-10">
+      <span class="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
+        Direct Communication
+      </span>
+      <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mt-3 mb-4">
+        Contact Our Editorial Desk
+      </h1>
+      <p class="text-slate-600 text-base leading-relaxed">
+        Have questions, corrections, or sponsorship inquiries? Fill out the form below or email us directly.
+      </p>
+    </div>
+
+    <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+      <form
+        action="https://formspree.io/f/sample"
+        method="POST"
+        class="space-y-6"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">
+              Your Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="e.g. Alex Turing"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">
+              Your Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="alex@domain.com"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">
+            Inquiry Subject
+          </label>
+          <select
+            id="subject"
+            name="subject"
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+          >
+            <option value="editorial">Editorial Feedback / Correction</option>
+            <option value="benchmark">Software Benchmark Submission</option>
+            <option value="advertising">Sponsorship & Direct Advertising</option>
+            <option value="other">General Question</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            placeholder="Provide context or details regarding your message..."
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm shadow transition-all cursor-pointer"
+        >
+          Send Message →
+        </button>
+      </form>
+    </div>
+
+    <div class="mt-8 text-center text-xs text-slate-500">
+      Direct editorial address: <strong class="text-slate-700">editorial@techpulse.dev</strong> • Response time within 48 business hours.
+    </div>
+  </div>
+</BaseLayout>

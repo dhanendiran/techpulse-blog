@@ -1,0 +1,118 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import AdBanner from '../components/AdBanner.astro';
+import AffiliateNotice from '../components/AffiliateNotice.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, author, authorRole, category, readingTime, hasAffiliateLinks } = post.data;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+}).format(pubDate);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={heroImage}
+  article={true}
+  publishedTime={pubDate.toISOString()}
+  modifiedTime={updatedDate?.toISOString()}
+  author={author}
+  category={category}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+      <a href="/" class="hover:text-slate-900 transition-colors">Home</a>
+      <span>/</span>
+      <a href="/blog" class="hover:text-slate-900 transition-colors">Articles</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium truncate max-w-xs">{title}</span>
+    </nav>
+
+    <!-- Post Header -->
+    <header class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-100 text-sky-800">
+          {category}
+        </span>
+        <span class="text-xs text-slate-500 font-medium">
+          {readingTime}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        {title}
+      </h1>
+
+      <p class="text-lg text-slate-600 leading-relaxed mb-6">
+        {description}
+      </p>
+
+      <!-- Author Bar (Google E-E-A-T Credibility) -->
+      <div class="flex items-center justify-between py-4 border-y border-slate-200 text-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">
+            D
+          </div>
+          <div>
+            <div class="font-bold text-slate-900">
+              <a href="/about" class="hover:underline">{author}</a>
+            </div>
+            <div class="text-xs text-slate-500">{authorRole}</div>
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-500">
+          <div>Published {formattedDate}</div>
+          {updatedDate && <div class="text-emerald-600 font-medium">Updated Recently</div>}
+        </div>
+      </div>
+    </header>
+
+    <!-- Top Display Ad Unit (IAB Leaderboard / Responsive) -->
+    <AdBanner slot="article-top-banner" label="Sponsored Content" />
+
+    <!-- FTC Affiliate Notice (if monetized with affiliate links) -->
+    {hasAffiliateLinks && <AffiliateNotice />}
+
+    <!-- Post Content -->
+    <div class="prose prose-slate max-w-none mx-auto py-4">
+      <slot />
+    </div>
+
+    <!-- Mid/Bottom In-Article Display Ad Unit -->
+    <AdBanner slot="article-bottom-banner" format="auto" label="Advertisement" />
+
+    <!-- Author Box / E-E-A-T Bio -->
+    <div class="my-10 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-4">
+      <div class="w-14 h-14 rounded-full bg-slate-900 text-white font-extrabold flex items-center justify-center text-xl shrink-0 shadow">
+        D
+      </div>
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <h4 class="font-bold text-slate-900 m-0">Written by {author}</h4>
+          <span class="text-xs px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-semibold">Author</span>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed mb-3">
+          AI & Cloud Systems Engineer. Specializing in autonomous developer agents, production RAG pipelines, and high-performance web architectures.
+        </p>
+        <div class="flex items-center gap-4 text-xs font-semibold text-sky-600">
+          <a href="/about" class="hover:underline">Full Bio & Benchmarks →</a>
+          <a href="/contact" class="hover:underline">Contact Author →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Opt-in Lead Magnet -->
+    <NewsletterCTA />
+  </article>
+</BaseLayout>

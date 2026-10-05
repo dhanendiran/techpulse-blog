@@ -1,0 +1,16 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+
+<div class={`p-4 bg-amber-50/70 border border-amber-200/80 rounded-xl text-xs text-amber-900 flex items-start gap-3 my-6 ${className}`}>
+  <div class="text-amber-600 shrink-0 text-base mt-0.5">ℹ️</div>
+  <div class="leading-relaxed">
+    <strong class="font-semibold text-amber-950">Transparency & Affiliate Disclosure:</strong>
+    Some links on this page are affiliate links. If you make a purchase through them, we may receive a small commission at no additional cost to you. We only recommend software and tools we have thoroughly benchmarked and vetted.
+    <a href="/affiliate-disclosure" class="underline font-medium hover:text-amber-700 ml-1">Read our full policy</a>.
+  </div>
+</div>

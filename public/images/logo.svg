@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <rect x="0" y="4" width="40" height="40" rx="10" fill="#0284c7"/>
+  <path d="M22 8L12 22h7l-2 10 10-14h-7l2-8z" fill="#ffffff"/>
+  <text x="50" y="32" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#0f172a">Tech<tspan fill="#0284c7">Pulse</tspan></text>
+</svg>

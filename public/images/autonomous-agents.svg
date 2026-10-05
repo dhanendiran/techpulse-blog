@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="agent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" rx="16" fill="url(#agent-grad)"/>
+  <circle cx="700" cy="100" r="150" fill="#10b981" opacity="0.2"/>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#34d399" letter-spacing="2">ARCHITECTURE BLUEPRINT</text>
+  <text x="60" y="210" font-family="system-ui, sans-serif" font-size="38" font-weight="800" fill="#ffffff">Autonomous AI Agents from Scratch</text>
+  <text x="60" y="260" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#a7f3d0">Stateful Loops • MCP Tools • Self-Healing Pipelines</text>
+  <rect x="60" y="300" width="160" height="40" rx="8" fill="#059669"/>
+  <text x="80" y="326" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">PRODUCTION SPEC</text>
+</svg>

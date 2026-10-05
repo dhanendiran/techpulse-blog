@@ -1,0 +1,51 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  category?: string;
+}
+
+const {
+  title = 'TechPulse - High ROI Software, AI & Engineering Insights',
+  description = 'TechPulse provides unbiased engineering benchmarks, autonomous AI tool comparisons, and guides for developers looking to build and monetize software.',
+  image,
+  article,
+  publishedTime,
+  modifiedTime,
+  author,
+  category,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      article={article}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      author={author}
+      category={category}
+    />
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-sky-500 selection:text-white">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
