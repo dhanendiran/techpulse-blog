@@ -24,7 +24,7 @@ const {
 // Analytics & Webmaster Verification (Fill these in when ready)
 const GA4_ID = ''; // Insert your Google Analytics 4 ID: 'G-XXXXXXXXXX'
 const GOOGLE_VERIFICATION_TOKEN = ''; // Insert your Google Search Console token
-const ADSENSE_ACCOUNT_ID = ''; // e.g. 'ca-pub-XXXXXXXXXXXXXXXX' for Auto-Ads verification
+const ADSENSE_ACCOUNT_ID = 'ca-pub-8361745863380313'; // Official Google AdSense Account ID
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://techpulse.dev');
 const imageURL = new URL(image, Astro.site || 'https://techpulse.dev');
@@ -111,7 +111,16 @@ const schema = article
 
 <!-- Google Search Console & AdSense Verification -->
 {GOOGLE_VERIFICATION_TOKEN && <meta name="google-site-verification" content={GOOGLE_VERIFICATION_TOKEN} />}
-{ADSENSE_ACCOUNT_ID && <meta name="google-adsense-account" content={ADSENSE_ACCOUNT_ID} />}
+{ADSENSE_ACCOUNT_ID && (
+  <>
+    <meta name="google-adsense-account" content={ADSENSE_ACCOUNT_ID} />
+    <script
+      async
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ACCOUNT_ID}`}
+      crossorigin="anonymous"
+    ></script>
+  </>
+)}
 
 <!-- RSS Feed Auto-discovery -->
 <link rel="alternate" type="application/rss+xml" title="TechPulse RSS Feed" href="/rss.xml" />
