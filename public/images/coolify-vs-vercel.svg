@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="coolify-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" rx="16" fill="url(#coolify-grad)"/>
+  <circle cx="700" cy="110" r="140" fill="#22c55e" opacity="0.2"/>
+  <circle cx="680" cy="290" r="90" fill="#10b981" opacity="0.25"/>
+  <text x="60" y="140" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#86efac" letter-spacing="2">DEVOPS & COST OPTIMIZATION</text>
+  <text x="60" y="200" font-family="system-ui, sans-serif" font-size="36" font-weight="800" fill="#ffffff">Coolify vs Vercel Architecture</text>
+  <text x="60" y="250" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#bbf7d0">Save 85% on Cloud Bills with Self-Hosted PaaS</text>
+  <rect x="60" y="295" width="180" height="42" rx="8" fill="#16a34a"/>
+  <text x="76" y="322" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">ZERO DOWNTIME</text>
+</svg>

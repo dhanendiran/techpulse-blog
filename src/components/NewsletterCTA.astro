@@ -109,7 +109,7 @@ const {
       return;
     }
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = emailInput.value.trim();
 
@@ -123,17 +123,45 @@ const {
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.75';
 
-      // Simulate instantaneous serverless subscription registration
-      setTimeout(() => {
-        try {
-          localStorage.setItem('techpulse_subscribed_email', email);
-        } catch (_) {}
+      try {
+        // Record subscriber locally with timestamp
+        localStorage.setItem('techpulse_subscribed_email', email);
+        const rawList = localStorage.getItem('techpulse_subscribers_list');
+        const subscribers = rawList ? JSON.parse(rawList) : [];
+        if (!subscribers.some((s: any) => s.email === email)) {
+          subscribers.push({ email, subscribedAt: new Date().toISOString() });
+          localStorage.setItem('techpulse_subscribers_list', JSON.stringify(subscribers));
+        }
 
+        // Forward to external webhook or serverless endpoint if configured
+        const endpoint = (window as any).__TECHPULSE_NEWSLETTER_ENDPOINT__;
+        if (endpoint) {
+          await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, source: 'TechPulse Blog' }),
+          }).catch(() => {});
+        }
+      } catch (_) {}
+
+      setTimeout(() => {
         formContainer.classList.add('hidden');
         successBox.classList.remove('hidden');
-      }, 500);
+      }, 400);
     });
   }
+
+  // Global helper for the site owner to export subscribers anytime from DevTools console
+  (window as any).__exportTechpulseSubscribers = () => {
+    try {
+      const raw = localStorage.getItem('techpulse_subscribers_list') || '[]';
+      const list = JSON.parse(raw);
+      console.table(list);
+      return list;
+    } catch (e) {
+      return [];
+    }
+  };
 
   // Run on initial load and Astro page navigations
   setupNewsletter();

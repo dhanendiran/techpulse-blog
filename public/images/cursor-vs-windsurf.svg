@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="cursor-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#311042"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" rx="16" fill="url(#cursor-grad)"/>
+  <circle cx="680" cy="120" r="140" fill="#a855f7" opacity="0.2"/>
+  <circle cx="720" cy="280" r="100" fill="#6366f1" opacity="0.25"/>
+  <text x="60" y="140" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#c084fc" letter-spacing="2">AI BENCHMARK 2026</text>
+  <text x="60" y="200" font-family="system-ui, sans-serif" font-size="36" font-weight="800" fill="#ffffff">Cursor vs Windsurf vs Copilot</text>
+  <text x="60" y="250" font-family="system-ui, sans-serif" font-size="20" font-weight="400" fill="#e9d5ff">Multi-File Refactoring, Speed & Context Limits</text>
+  <rect x="60" y="295" width="190" height="42" rx="8" fill="#9333ea"/>
+  <text x="76" y="322" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff">SPEED & ACCURACY</text>
+</svg>

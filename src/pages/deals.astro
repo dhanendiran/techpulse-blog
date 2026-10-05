@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
+import { AFFILIATE_PARTNERS } from '../config/affiliates';
 
 interface Deal {
   id: string;
   name: string;
-  category: 'cloud' | 'ai' | 'database' | 'hardware';
+  category: 'cloud' | 'ai' | 'database' | 'hardware' | 'tools';
   badge: string;
   badgeColor?: string;
   discount: string;
@@ -18,7 +19,7 @@ interface Deal {
   requirements: string;
 }
 
-const deals: Deal[] = [
+const rawDeals: Omit<Deal, 'affiliateUrl'>[] = [
   {
     id: 'hetzner',
     name: 'Hetzner Cloud VPS',
@@ -28,7 +29,6 @@ const deals: Deal[] = [
     discount: '€20 Free Cloud Credits',
     description: 'Get €20 in free cloud infrastructure credits instantly upon registration. Deploy dedicated AMD EPYC or ARM vCPUs with enterprise NVMe storage.',
     code: 'AUTO-APPLIED',
-    affiliateUrl: 'https://hetzner.com?ref=techpulse',
     ctaText: 'Claim €20 Free Hetzner Credit',
     verifiedDate: 'Verified Active Today',
     savings: '€20 Value (~4 Months Free VPS)',
@@ -43,7 +43,6 @@ const deals: Deal[] = [
     discount: '$200 60-Day Credit',
     description: 'Receive $200 in free credit valid for 60 days across Droplets, Kubernetes clusters, and App Platform managed container runtimes.',
     code: 'AUTO-APPLIED',
-    affiliateUrl: 'https://digitalocean.com?ref=techpulse',
     ctaText: 'Claim $200 DigitalOcean Credit',
     verifiedDate: 'Verified Active Today',
     savings: '$200 Value',
@@ -58,11 +57,50 @@ const deals: Deal[] = [
     discount: '14-Day Free Pro Trial',
     description: 'Access unlimited fast Claude 3.5 Sonnet, GPT-4o, and multi-file Composer refactoring loops in the leading AI-native code editor.',
     code: 'FREE-TIER',
-    affiliateUrl: 'https://cursor.com?ref=techpulse',
     ctaText: 'Try Cursor Pro Free',
     verifiedDate: 'Verified Active Today',
     savings: '$20/month Free Trial',
     requirements: 'No credit card required for standard tier',
+  },
+  {
+    id: 'windsurf',
+    name: 'Codeium Windsurf',
+    category: 'ai',
+    badge: 'Blazing Fast AI',
+    badgeColor: 'bg-purple-600',
+    discount: 'Free Cascade AI Tier',
+    description: 'Autonomous AI coding engine with instant AST codebase awareness and sub-150ms latency inline autocomplete.',
+    code: 'AUTO-APPLIED',
+    ctaText: 'Get Windsurf Free',
+    verifiedDate: 'Verified Active Today',
+    savings: 'Free Forever Tier',
+    requirements: 'Free registration via GitHub',
+  },
+  {
+    id: 'raycast',
+    name: 'Raycast',
+    category: 'tools',
+    badge: 'Essential Utility',
+    badgeColor: 'bg-amber-600',
+    discount: 'Free Core + Pro Trial',
+    description: 'The native Swift keyboard launcher replacing Spotlight with window tiling, clipboard history, and thousands of dev plugins.',
+    ctaText: 'Download Raycast Free',
+    verifiedDate: 'Verified Active Today',
+    savings: 'Free Essential Core',
+    requirements: 'Available on macOS and Windows',
+  },
+  {
+    id: 'warp',
+    name: 'Warp Terminal',
+    category: 'tools',
+    badge: 'Modern CLI',
+    badgeColor: 'bg-teal-600',
+    discount: 'Free Engineering Tier',
+    description: 'A Rust-powered GPU-accelerated terminal treating command outputs as interactive blocks with AI debug assistance.',
+    ctaText: 'Download Warp Terminal',
+    verifiedDate: 'Verified Active Today',
+    savings: 'Free for Individual Devs',
+    requirements: 'Available across macOS, Linux, and Windows',
   },
   {
     id: 'neon',
@@ -73,7 +111,6 @@ const deals: Deal[] = [
     discount: 'Free Serverless Database',
     description: 'Deploy instant serverless Postgres with git-like branching, scale-to-zero compute, and 0.5GB storage permanently free.',
     code: 'ALWAYS-FREE',
-    affiliateUrl: 'https://neon.tech?ref=techpulse',
     ctaText: 'Deploy Free Neon Postgres',
     verifiedDate: 'Verified Active Today',
     savings: 'Permanent Free Tier',
@@ -88,27 +125,30 @@ const deals: Deal[] = [
     discount: 'Free Developer Project',
     description: 'Includes 500MB Postgres database, built-in Auth for 50,000 MAU, pgvector support, and 1GB file storage at zero monthly cost.',
     code: 'FREE-TIER',
-    affiliateUrl: 'https://supabase.com?ref=techpulse',
     ctaText: 'Start Free on Supabase',
     verifiedDate: 'Verified Active Today',
     savings: '$25/mo Equivalent',
     requirements: 'Up to 2 active projects free',
   },
   {
-    id: 'macbook',
+    id: 'amazon',
     name: 'Apple MacBook Pro (M4)',
     category: 'hardware',
     badge: 'Hardware Deal',
     badgeColor: 'bg-slate-900',
     discount: 'Up to $200 - $250 Off',
     description: 'Check current authorized Amazon and Apple Education discounts on the M4, M4 Pro, and M4 Max 14" and 16" developer laptops.',
-    affiliateUrl: 'https://amazon.com?tag=techpulse-20',
     ctaText: 'View Current Amazon Deals',
     verifiedDate: 'Prices Checked Daily',
     savings: 'Up to $250 Instant Savings',
     requirements: 'Subject to stock availability',
   },
 ];
+
+const deals: Deal[] = rawDeals.map((deal) => ({
+  ...deal,
+  affiliateUrl: AFFILIATE_PARTNERS[deal.id]?.affiliateUrl || 'https://techpulse.dev',
+}));
 ---
 
 <BaseLayout
@@ -186,6 +226,12 @@ const deals: Deal[] = [
           class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-900 cursor-pointer transition-all"
         >
           Hardware
+        </button>
+        <button
+          data-filter="tools"
+          class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-900 cursor-pointer transition-all"
+        >
+          Dev Tools
         </button>
       </div>
     </div>

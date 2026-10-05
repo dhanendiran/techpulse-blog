@@ -2,13 +2,15 @@
  * TechPulse Monetization & Affiliate Link Registry
  * 
  * Update your affiliate tags, referral IDs, and discount links in this file.
- * All articles, deal cards, and comparison matrices can pull from here.
+ * All articles, deal cards, and comparison matrices pull from here.
+ * 
+ * To activate your real links, simply replace the placeholder affiliateUrl values below.
  */
 
 export interface AffiliatePartner {
   id: string;
   name: string;
-  category: 'cloud' | 'ai' | 'database' | 'hardware' | 'saas';
+  category: 'cloud' | 'ai' | 'database' | 'hardware' | 'saas' | 'tools';
   affiliateUrl: string;
   network: string; // e.g. 'Direct Partner', 'Impact', 'Amazon Associates', 'PartnerStack'
   commissionModel: string; // e.g. '15% recurring', '$25 bounty', '3-4%'
@@ -19,7 +21,7 @@ export interface AffiliatePartner {
 export const AFFILIATE_PARTNERS: Record<string, AffiliatePartner> = {
   hetzner: {
     id: 'hetzner',
-    name: 'Hetzner Cloud',
+    name: 'Hetzner Cloud VPS',
     category: 'cloud',
     affiliateUrl: 'https://hetzner.com?ref=techpulse', // Replace with your Hetzner referral URL
     network: 'Hetzner Referral Program',
@@ -29,7 +31,7 @@ export const AFFILIATE_PARTNERS: Record<string, AffiliatePartner> = {
   },
   digitalocean: {
     id: 'digitalocean',
-    name: 'DigitalOcean',
+    name: 'DigitalOcean Cloud',
     category: 'cloud',
     affiliateUrl: 'https://digitalocean.com?ref=techpulse', // Replace with your DO referral link
     network: 'DigitalOcean Referral Program',
@@ -39,13 +41,50 @@ export const AFFILIATE_PARTNERS: Record<string, AffiliatePartner> = {
   },
   cursor: {
     id: 'cursor',
-    name: 'Cursor AI',
+    name: 'Cursor AI IDE',
     category: 'ai',
     affiliateUrl: 'https://cursor.com?ref=techpulse', // Replace with your Cursor partner link
     network: 'Direct Partner / Creator Tier',
     commissionModel: '20% first-year subscription referral',
     promoCode: 'FREE-TIER',
     activeDeal: '14-Day Free Pro Trial (Unlimited Fast Composer)',
+  },
+  windsurf: {
+    id: 'windsurf',
+    name: 'Codeium Windsurf',
+    category: 'ai',
+    affiliateUrl: 'https://codeium.com/windsurf?ref=techpulse',
+    network: 'Codeium Creator Program',
+    commissionModel: '15% recurring affiliate bounty',
+    promoCode: 'AUTO-APPLIED',
+    activeDeal: 'Free tier with Cascade AI agent',
+  },
+  raycast: {
+    id: 'raycast',
+    name: 'Raycast',
+    category: 'tools',
+    affiliateUrl: 'https://raycast.com?ref=techpulse',
+    network: 'Raycast Partner',
+    commissionModel: '20% recurring on Pro subscriptions',
+    activeDeal: 'Free Core Utilities + 14-day Pro AI trial',
+  },
+  warp: {
+    id: 'warp',
+    name: 'Warp Terminal',
+    category: 'tools',
+    affiliateUrl: 'https://warp.dev?ref=techpulse',
+    network: 'Warp Developer Program',
+    commissionModel: 'Developer bounty per activated team',
+    activeDeal: 'Free forever for individual engineers',
+  },
+  linear: {
+    id: 'linear',
+    name: 'Linear',
+    category: 'tools',
+    affiliateUrl: 'https://linear.app?ref=techpulse',
+    network: 'Linear Partner Program',
+    commissionModel: 'SaaS referral bounty',
+    activeDeal: 'Free for teams up to 250 active issues',
   },
   neon: {
     id: 'neon',
@@ -93,3 +132,10 @@ export const AFFILIATE_PARTNERS: Record<string, AffiliatePartner> = {
     activeDeal: 'Free video generation starter credits',
   },
 };
+
+/**
+ * Helper to fetch a partner or fallback safely
+ */
+export function getAffiliate(partnerId: string): AffiliatePartner | undefined {
+  return AFFILIATE_PARTNERS[partnerId];
+}
