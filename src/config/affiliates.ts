@@ -33,7 +33,7 @@ export const AFFILIATE_PARTNERS: Record<string, AffiliatePartner> = {
     id: 'digitalocean',
     name: 'DigitalOcean Cloud',
     category: 'cloud',
-    affiliateUrl: 'https://digitalocean.com?ref=techpulse', // Replace with your DO referral link
+    affiliateUrl: 'https://m.do.co/c/e79b2fbe376d', // Official DigitalOcean referral link
     network: 'DigitalOcean Referral Program',
     commissionModel: '$25 credit or cash per user who spends $25',
     promoCode: 'AUTO-APPLIED',
