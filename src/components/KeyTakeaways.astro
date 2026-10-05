@@ -1,0 +1,37 @@
+---
+interface Props {
+  points: string[];
+  verdict?: string;
+}
+
+const { points = [], verdict } = Astro.props;
+---
+
+<div class="my-8 rounded-2xl bg-gradient-to-br from-slate-50 to-sky-50/40 border border-sky-100 p-6 shadow-xs relative overflow-hidden">
+  <div class="flex items-center gap-2.5 mb-4">
+    <div class="w-6 h-6 rounded-lg bg-sky-600 text-white flex items-center justify-center text-xs font-bold shadow-xs">
+      ⚡
+    </div>
+    <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-900 m-0">
+      Executive Summary & Key Takeaways
+    </h3>
+  </div>
+
+  <ul class="space-y-2.5 text-sm text-slate-700 pl-0 list-none m-0 mb-4">
+    {points.map((pt) => (
+      <li class="flex items-start gap-2.5">
+        <span class="w-5 h-5 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+          ✓
+        </span>
+        <span class="leading-relaxed font-medium">{pt}</span>
+      </li>
+    ))}
+  </ul>
+
+  {verdict && (
+    <div class="pt-3.5 border-t border-sky-100/80 flex items-start gap-2 text-xs text-slate-600">
+      <strong class="text-sky-900 font-bold shrink-0">Bottom Line Verdict:</strong>
+      <span class="italic text-slate-700">{verdict}</span>
+    </div>
+  )}
+</div>

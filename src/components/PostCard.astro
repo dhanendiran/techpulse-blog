@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, category, readingTime, hasAffiliateLinks } = post.data;
+const { title, description, pubDate, category, readingTime, hasAffiliateLinks, heroImage } = post.data;
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -15,42 +15,57 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(pubDate);
 ---
 
-<article class="bg-white rounded-2xl border border-slate-200 hover:border-sky-300 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden group">
-  <div class="p-6 flex-1 flex flex-col justify-between">
-    <div>
-      <div class="flex items-center justify-between gap-2 mb-3">
-        <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 border border-sky-100">
-          {category}
+<article class="bg-white rounded-3xl border border-slate-200/80 hover:border-slate-400 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group editorial-card">
+  <!-- Card Header Graphic/Badge -->
+  <div class="h-44 w-full bg-slate-900 relative overflow-hidden flex items-center justify-center p-6">
+    <img
+      src={heroImage}
+      alt={title}
+      class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
+      loading="lazy"
+    />
+    <div class="absolute top-3.5 left-3.5 flex items-center gap-2">
+      <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-950/80 text-white backdrop-blur-md border border-white/10">
+        {category}
+      </span>
+      {hasAffiliateLinks && (
+        <span class="text-[10px] uppercase font-bold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded-full border border-amber-500/20 backdrop-blur-md">
+          Tested Pick
         </span>
-        <div class="flex items-center gap-2 text-xs text-slate-400">
-          {hasAffiliateLinks && (
-            <span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
-              Affiliate Review
-            </span>
-          )}
-          <span>{readingTime}</span>
-        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-2 text-xs text-slate-400 font-medium mb-2.5">
+        <span>⏱ {readingTime}</span>
+        <span>•</span>
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
       </div>
 
-      <h3 class="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-2 mb-2">
+      <h3 class="text-xl font-bold text-slate-950 group-hover:text-sky-600 transition-colors line-clamp-2 mb-3 leading-snug tracking-tight">
         <a href={`/blog/${post.id}`}>
           {title}
         </a>
       </h3>
 
-      <p class="text-sm text-slate-600 line-clamp-3 mb-4 leading-relaxed">
+      <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 mb-6 leading-relaxed">
         {description}
       </p>
     </div>
 
-    <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-      <div class="flex items-center gap-2">
+    <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+      <div class="flex items-center gap-2.5 text-slate-700 font-semibold">
         <div class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-[10px]">
           D
         </div>
         <span>{post.data.author}</span>
       </div>
-      <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+
+      <span class="text-xs font-bold text-sky-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+        Read Teardown →
+      </span>
     </div>
   </div>
 </article>

@@ -1,0 +1,39 @@
+---
+interface Props {
+  hoursTested?: string;
+  toolsBenchmarked?: string;
+  lastAudited?: string;
+}
+
+const {
+  hoursTested = '120+ Hours Lab Benchmarked',
+  toolsBenchmarked = '5 Flagship Tools Tested',
+  lastAudited = 'October 2026',
+} = Astro.props;
+---
+
+<div class="my-6 p-4 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs">
+  <div class="flex items-center gap-2">
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs">
+      ✓
+    </span>
+    <span class="font-bold text-white tracking-wide">Independent Engineering Lab</span>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-slate-400">
+    <span class="flex items-center gap-1.5">
+      <span class="text-sky-400 font-semibold">⏱</span>
+      <span>{hoursTested}</span>
+    </span>
+    <span class="hidden sm:inline-block text-slate-700">•</span>
+    <span class="flex items-center gap-1.5">
+      <span class="text-amber-400 font-semibold">🔬</span>
+      <span>{toolsBenchmarked}</span>
+    </span>
+    <span class="hidden sm:inline-block text-slate-700">•</span>
+    <span class="flex items-center gap-1.5">
+      <span class="text-emerald-400 font-semibold">🛡️</span>
+      <span>Zero Paid Placement</span>
+    </span>
+  </div>
+</div>

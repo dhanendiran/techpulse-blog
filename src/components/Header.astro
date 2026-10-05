@@ -2,35 +2,39 @@
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { name: 'Home', href: '/' },
   { name: 'Articles', href: '/blog' },
+  { name: 'Benchmarks', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 group">
-      <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-sm group-hover:scale-105 transition-transform">
+<header class="sticky top-0 z-50 glass-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Logo & Brand -->
+    <a href="/" class="flex items-center gap-2.5 group">
+      <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black text-lg shadow-sm group-hover:bg-sky-600 transition-colors">
         ⚡
       </div>
-      <div>
-        <span class="font-extrabold text-xl tracking-tight text-slate-900">Tech<span class="text-sky-600">Pulse</span></span>
-        <span class="hidden sm:inline-block ml-1 text-xs font-semibold px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded">AI & DEV</span>
+      <div class="flex items-baseline gap-1.5">
+        <span class="font-black text-xl tracking-tight text-slate-950">
+          Tech<span class="text-sky-600">Pulse</span>
+        </span>
+        <span class="text-[9px] uppercase font-black tracking-widest px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
+          LAB
+        </span>
       </div>
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-6">
+    <nav class="hidden md:flex items-center gap-8">
       {navLinks.map((link) => {
         const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
         return (
           <a
             href={link.href}
-            class={`text-sm font-medium transition-colors ${
-              isActive ? 'text-sky-600 font-semibold' : 'text-slate-600 hover:text-slate-900'
+            class={`text-sm font-semibold transition-colors ${
+              isActive ? 'text-sky-600 font-bold' : 'text-slate-600 hover:text-slate-950'
             }`}
           >
             {link.name}
@@ -42,19 +46,31 @@ const navLinks = [
     <!-- Header Actions -->
     <div class="flex items-center gap-3">
       <a
-        href="#newsletter"
-        class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors shadow-sm"
+        href="/blog"
+        title="Search Articles"
+        class="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors"
       >
-        Subscribe
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
       </a>
+
       <a
         href="/rss.xml"
         title="RSS Feed"
-        class="p-2 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-lg transition-colors"
+        class="hidden sm:inline-flex p-2 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-xl transition-colors"
       >
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
         </svg>
+      </a>
+
+      <a
+        href="#newsletter"
+        class="inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-white bg-slate-950 rounded-xl hover:bg-sky-600 transition-colors shadow-xs"
+      >
+        Subscribe Free
       </a>
     </div>
   </div>

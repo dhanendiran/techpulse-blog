@@ -8,6 +8,7 @@ import TableOfContents from '../components/TableOfContents.astro';
 import ReadingProgressBar from '../components/ReadingProgressBar.astro';
 import SocialShare from '../components/SocialShare.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
+import TrustBadge from '../components/TrustBadge.astro';
 
 interface Heading {
   depth: number;
@@ -28,6 +29,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
   year: 'numeric',
 }).format(pubDate);
+
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 
 <BaseLayout
@@ -42,99 +45,164 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 >
   <ReadingProgressBar />
 
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <!-- Breadcrumbs -->
-    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6 font-medium">
       <a href="/" class="hover:text-slate-900 transition-colors">Home</a>
-      <span>/</span>
+      <span class="text-slate-300">/</span>
       <a href="/blog" class="hover:text-slate-900 transition-colors">Articles</a>
-      <span>/</span>
-      <span class="text-slate-800 font-medium truncate max-w-xs">{title}</span>
+      <span class="text-slate-300">/</span>
+      <span class="text-sky-700 font-semibold">{category}</span>
     </nav>
 
-    <!-- Post Header -->
-    <header class="mb-8">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-100 text-sky-800">
-          {category}
-        </span>
-        <span class="text-xs text-slate-500 font-medium">
-          {readingTime}
-        </span>
-      </div>
+    <!-- Main Editorial Two-Column Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <!-- Article Core Column (8 cols on large screens) -->
+      <article class="lg:col-span-8 max-w-3xl">
+        <!-- Post Header -->
+        <header class="mb-8">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-100 text-sky-800">
+              {category}
+            </span>
+            <span class="text-xs text-slate-500 font-medium">
+              ⏱ {readingTime}
+            </span>
+            {hasAffiliateLinks && (
+              <span class="text-[10px] uppercase font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                Independent Buyer's Guide
+              </span>
+            )}
+          </div>
 
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-        {title}
-      </h1>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-[1.18] mb-4">
+            {title}
+          </h1>
 
-      <p class="text-lg text-slate-600 leading-relaxed mb-6">
-        {description}
-      </p>
+          <p class="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal mb-6">
+            {description}
+          </p>
 
-      <!-- Author Bar (Google E-E-A-T Credibility) -->
-      <div class="flex items-center justify-between py-4 border-y border-slate-200 text-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">
+          <!-- Author Byline Bar (Google E-E-A-T Credibility) -->
+          <div class="flex items-center justify-between py-4 border-y border-slate-200 text-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white font-extrabold flex items-center justify-center text-sm shadow-sm ring-2 ring-white">
+                D
+              </div>
+              <div>
+                <div class="font-bold text-slate-900">
+                  <a href="/about" class="hover:underline">{author}</a>
+                </div>
+                <div class="text-xs text-slate-500">{authorRole}</div>
+              </div>
+            </div>
+            <div class="text-right text-xs text-slate-500">
+              <div>Published {formattedDate}</div>
+              {updatedDate && <div class="text-emerald-600 font-semibold mt-0.5">Verified & Updated Recently</div>}
+            </div>
+          </div>
+        </header>
+
+        <!-- Testing Trust Badge -->
+        <TrustBadge />
+
+        <!-- FTC Affiliate Notice (if monetized with affiliate links) -->
+        {hasAffiliateLinks && <AffiliateNotice />}
+
+        <!-- Mobile Table of Contents (Collapsible on small screens) -->
+        <div class="lg:hidden">
+          <TableOfContents headings={headings} />
+        </div>
+
+        <!-- Top Display Ad Unit -->
+        <AdBanner slot="article-top-banner" label="Sponsored Content" />
+
+        <!-- Post Content -->
+        <div class="prose prose-slate max-w-none py-4">
+          <slot />
+        </div>
+
+        <!-- Social Share Buttons -->
+        <SocialShare title={title} />
+
+        <!-- Mid/Bottom In-Article Display Ad Unit -->
+        <AdBanner slot="article-bottom-banner" format="auto" label="Advertisement" />
+
+        <!-- Author Box / E-E-A-T Bio -->
+        <div class="my-10 p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-5">
+          <div class="w-16 h-16 rounded-full bg-slate-900 text-white font-black flex items-center justify-center text-2xl shrink-0 shadow">
             D
           </div>
           <div>
-            <div class="font-bold text-slate-900">
-              <a href="/about" class="hover:underline">{author}</a>
+            <div class="flex items-center gap-2 mb-1.5">
+              <h4 class="font-bold text-lg text-slate-900 m-0">Written by {author}</h4>
+              <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-bold border border-sky-100">
+                Staff Author
+              </span>
             </div>
-            <div class="text-xs text-slate-500">{authorRole}</div>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">
+              AI & Cloud Systems Engineer. Specializing in autonomous developer agents, production RAG pipelines, and high-performance web architectures.
+            </p>
+            <div class="flex items-center gap-4 text-xs font-bold text-sky-600">
+              <a href="/about" class="hover:underline">Full Bio & Testing Methodology →</a>
+              <a href="/contact" class="hover:underline">Contact Editorial Desk →</a>
+            </div>
           </div>
         </div>
-        <div class="text-right text-xs text-slate-500">
-          <div>Published {formattedDate}</div>
-          {updatedDate && <div class="text-emerald-600 font-medium">Updated Recently</div>}
+
+        <!-- Related Next Reads -->
+        <RelatedPosts currentPostId={post.id} category={category} />
+
+        <!-- Newsletter Opt-in Lead Magnet -->
+        <NewsletterCTA />
+      </article>
+
+      <!-- Sticky Editorial Sidebar (4 cols on large screens) -->
+      <aside class="hidden lg:block lg:col-span-4 sticky top-24 space-y-6">
+        <!-- Sticky Table of Contents -->
+        {filteredHeadings.length > 0 && (
+          <div class="p-6 bg-white rounded-3xl border border-slate-200/80 shadow-xs">
+            <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-900 mb-4 pb-3 border-b border-slate-100">
+              <span class="flex items-center gap-2">
+                <span>📑</span> In This Article
+              </span>
+              <span class="text-slate-400 font-normal">{filteredHeadings.length} sections</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-600 pl-0 list-none m-0 max-h-[50vh] overflow-y-auto pr-2">
+              {filteredHeadings.map((h) => (
+                <li class={h.depth === 3 ? 'pl-3 text-slate-500' : 'font-semibold text-slate-800'}>
+                  <a
+                    href={`#${h.slug}`}
+                    class="hover:text-sky-600 transition-colors block py-0.5 truncate"
+                    title={h.text}
+                  >
+                    {h.depth === 3 ? '↳ ' : '• '} {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Quick Editorial Value Box -->
+        <div class="p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-md">
+          <div class="text-xs uppercase font-bold tracking-widest text-sky-400 mb-2">
+            Weekly Tech Digest
+          </div>
+          <h4 class="font-bold text-base text-white mb-2">
+            Stay Ahead in AI & DevOps
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            Join 18,500+ engineers receiving our weekly Sunday deep-dives and verified tool benchmarks.
+          </p>
+          <a
+            href="#newsletter"
+            class="block w-full py-2.5 text-center text-xs font-bold rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 transition-colors"
+          >
+            Join Free Newsletter →
+          </a>
         </div>
-      </div>
-    </header>
-
-    <!-- Top Display Ad Unit (IAB Leaderboard / Responsive) -->
-    <AdBanner slot="article-top-banner" label="Sponsored Content" />
-
-    <!-- FTC Affiliate Notice (if monetized with affiliate links) -->
-    {hasAffiliateLinks && <AffiliateNotice />}
-
-    <!-- Table of Contents -->
-    <TableOfContents headings={headings} />
-
-    <!-- Post Content -->
-    <div class="prose prose-slate max-w-none mx-auto py-4">
-      <slot />
+      </aside>
     </div>
-
-    <!-- Social Share Buttons -->
-    <SocialShare title={title} />
-
-    <!-- Mid/Bottom In-Article Display Ad Unit -->
-    <AdBanner slot="article-bottom-banner" format="auto" label="Advertisement" />
-
-    <!-- Author Box / E-E-A-T Bio -->
-    <div class="my-10 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-4">
-      <div class="w-14 h-14 rounded-full bg-slate-900 text-white font-extrabold flex items-center justify-center text-xl shrink-0 shadow">
-        D
-      </div>
-      <div>
-        <div class="flex items-center gap-2 mb-1">
-          <h4 class="font-bold text-slate-900 m-0">Written by {author}</h4>
-          <span class="text-xs px-2 py-0.5 rounded bg-sky-50 text-sky-700 font-semibold">Author</span>
-        </div>
-        <p class="text-sm text-slate-600 leading-relaxed mb-3">
-          AI & Cloud Systems Engineer. Specializing in autonomous developer agents, production RAG pipelines, and high-performance web architectures.
-        </p>
-        <div class="flex items-center gap-4 text-xs font-semibold text-sky-600">
-          <a href="/about" class="hover:underline">Full Bio & Benchmarks →</a>
-          <a href="/contact" class="hover:underline">Contact Author →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Related Next Reads -->
-    <RelatedPosts currentPostId={post.id} category={category} />
-
-    <!-- Newsletter Opt-in Lead Magnet -->
-    <NewsletterCTA />
-  </article>
+  </div>
 </BaseLayout>

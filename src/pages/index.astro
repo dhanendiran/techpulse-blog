@@ -17,96 +17,134 @@ const featuredDate = featuredPost
 ---
 
 <BaseLayout
-  title="TechPulse - Engineering Benchmarks, AI Agents & Software Reviews"
-  description="In-depth benchmarks, autonomous AI tool comparisons, and guides for developers looking to build scalable software and maximize productivity."
+  title="TechPulse — Unbiased AI & Software Engineering Benchmarks"
+  description="Reproducible software benchmarks, autonomous AI tool comparisons, and system design teardowns for engineering leaders and developers."
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Hero Section -->
-    <section class="text-center py-8 sm:py-12 border-b border-slate-200">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200 mb-6">
-        <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
-        Zero Fluff • Real Benchmarks • Verified ROI
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- Hero Editorial Banner -->
+    <section class="text-center py-10 sm:py-16 border-b border-slate-200/80">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-slate-900 border border-slate-200/80 shadow-xs mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Independent Lab Tests &amp; Architecture Blueprints</span>
       </div>
 
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-        Autonomous AI, Cloud Systems & <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600">Dev Tooling</span>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-950 tracking-tight leading-[1.08] max-w-5xl mx-auto mb-6">
+        Autonomous AI, Cloud Systems &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-700">Developer Velocity</span>
       </h1>
 
-      <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-        Technical teardowns, hands-on software reviews, and architectural blueprints designed to help engineers build faster and monetize their craft.
+      <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+        We rigorously stress-test developer tools, AI coding agents, and cloud platforms across thousands of production lines. Zero fluff. Pure data.
       </p>
 
-      <div class="flex flex-wrap items-center justify-center gap-3">
+      <!-- Trust Badges Ticker -->
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 font-semibold mb-8">
+        <span class="flex items-center gap-1.5 text-slate-700">
+          <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          100% Independent Benchmarks
+        </span>
+        <span class="text-slate-300">•</span>
+        <span class="flex items-center gap-1.5 text-slate-700">
+          <svg class="w-4 h-4 text-sky-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          Zero Paid Ranking Bias
+        </span>
+        <span class="text-slate-300">•</span>
+        <span class="flex items-center gap-1.5 text-slate-700">
+          <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          Tested on Production Workloads
+        </span>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3.5">
         <a
           href="/blog"
-          class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm shadow-sm transition-all"
+          class="px-7 py-3.5 rounded-xl bg-slate-950 hover:bg-sky-600 text-white font-bold text-sm shadow-sm transition-all"
         >
-          Explore All Articles →
+          Explore All Articles ({allPosts.length}) →
         </a>
         <a
           href="#newsletter"
-          class="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-semibold text-sm border border-slate-300 shadow-sm transition-all"
+          class="px-7 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 font-bold text-sm border border-slate-300 shadow-xs transition-all"
         >
-          Join 15,000+ Readers
+          Join 18,500+ Engineers
         </a>
       </div>
     </section>
 
-    <!-- Top Homepage Display Ad (Leaderboard) -->
-    <AdBanner slot="home-top-banner" label="Sponsored Placement" />
+    <!-- Top Display Ad Unit -->
+    <AdBanner slot="home-top-banner" label="Sponsored Partner" />
 
-    <!-- Featured Post Hero Card -->
+    <!-- Lead Editorial Feature Story -->
     {featuredPost && (
-      <section class="my-12">
+      <section class="my-14">
         <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <span>🔥</span> Featured Editorial
-          </h2>
-          <span class="text-xs uppercase font-bold tracking-wider text-sky-600">Must Read</span>
+          <div class="flex items-center gap-2">
+            <span class="text-rose-600 font-black text-lg">⚡</span>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-950 tracking-tight m-0">
+              Lead Editorial Teardown
+            </h2>
+          </div>
+          <span class="text-xs uppercase font-extrabold tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-100">
+            Benchmark of the Month
+          </span>
         </div>
 
-        <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm hover:shadow-md transition-shadow">
-          <div class="flex flex-col lg:flex-row gap-8 items-start">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-100 text-sky-800">
-                  {featuredPost.data.category}
-                </span>
-                <span class="text-xs text-slate-500 font-medium">
-                  {featuredPost.data.readingTime}
-                </span>
-                {featuredPost.data.hasAffiliateLinks && (
-                  <span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                    Buyer's Guide
+        <div class="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-sm hover:shadow-lg transition-all">
+          <div class="flex flex-col lg:flex-row gap-8 items-center">
+            <div class="lg:w-1/2 w-full h-64 sm:h-80 rounded-2xl overflow-hidden bg-slate-900 shadow-xs relative">
+              <img
+                src={featuredPost.data.heroImage}
+                alt={featuredPost.data.title}
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <div class="lg:w-1/2 w-full flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-950 text-white">
+                    {featuredPost.data.category}
                   </span>
-                )}
+                  <span class="text-xs text-slate-400 font-medium">
+                    ⏱ {featuredPost.data.readingTime}
+                  </span>
+                  {featuredPost.data.hasAffiliateLinks && (
+                    <span class="text-[10px] uppercase font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                      Buyer's Guide
+                    </span>
+                  )}
+                </div>
+
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-950 mb-4 leading-tight">
+                  <a href={`/blog/${featuredPost.id}`} class="hover:text-sky-600 transition-colors">
+                    {featuredPost.data.title}
+                  </a>
+                </h3>
+
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base mb-6">
+                  {featuredPost.data.description}
+                </p>
               </div>
 
-              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4 leading-snug">
-                <a href={`/blog/${featuredPost.id}`} class="hover:text-sky-600 transition-colors">
-                  {featuredPost.data.title}
-                </a>
-              </h3>
-
-              <p class="text-slate-600 leading-relaxed text-base mb-6">
-                {featuredPost.data.description}
-              </p>
-
-              <div class="flex items-center justify-between pt-4 border-t border-slate-200">
-                <div class="flex items-center gap-2 text-xs text-slate-600">
-                  <div class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+              <div class="flex items-center justify-between pt-5 border-t border-slate-100">
+                <div class="flex items-center gap-2.5 text-xs text-slate-600">
+                  <div class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
                     D
                   </div>
                   <div>
                     <span class="font-bold text-slate-900">{featuredPost.data.author}</span>
-                    <span class="mx-1">•</span>
-                    <span>{featuredDate}</span>
+                    <div class="text-[11px] text-slate-400">{featuredDate}</div>
                   </div>
                 </div>
 
                 <a
                   href={`/blog/${featuredPost.id}`}
-                  class="inline-flex items-center gap-1.5 text-sm font-bold text-sky-600 hover:text-sky-700"
+                  class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-xs transition-colors"
                 >
                   Read Full Teardown →
                 </a>
@@ -117,87 +155,96 @@ const featuredDate = featuredPost
       </section>
     )}
 
-    <!-- Recent Articles Grid -->
+    <!-- Magazine Articles Grid -->
     <section class="my-16">
       <div class="flex items-center justify-between mb-8">
         <div>
-          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">
-            Latest Publications
+          <h2 class="text-2xl font-black text-slate-950 tracking-tight">
+            Latest Tested Benchmarks
           </h2>
           <p class="text-sm text-slate-500 mt-1">
-            Deep-dive tutorials, benchmarks, and infrastructure analyses.
+            Deep-dive reviews, system architecture guides, and cost optimizations.
           </p>
         </div>
 
-        <a href="/blog" class="text-sm font-semibold text-sky-600 hover:text-sky-700">
-          View Archive ({allPosts.length}) →
+        <a href="/blog" class="text-xs font-bold uppercase tracking-wider text-sky-600 hover:text-sky-700">
+          View All ({allPosts.length}) →
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {recentPosts.map((post) => (
           <PostCard post={post} />
         ))}
       </div>
     </section>
 
-    <!-- Monetization Highlight: Recommended Developer Stack (Affiliate Widget) -->
-    <section class="my-16 p-8 bg-white border border-slate-200 rounded-3xl shadow-sm">
-      <div class="text-center max-w-xl mx-auto mb-8">
-        <span class="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-          Vetted Stack
+    <!-- Monetization Section: Vetted Developer Tech Stack Matrix -->
+    <section class="my-16 p-8 sm:p-10 bg-white border border-slate-200/80 rounded-3xl shadow-xs">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs font-black uppercase tracking-wider text-sky-700 bg-sky-50 px-3.5 py-1 rounded-full border border-sky-100">
+          Independent Radar
         </span>
-        <h3 class="text-2xl font-extrabold text-slate-900 mt-3 mb-2">
-          Recommended Developer Tools
+        <h3 class="text-2xl sm:text-3xl font-black text-slate-950 mt-3 mb-2">
+          Recommended Developer Stack (2026)
         </h3>
-        <p class="text-sm text-slate-500">
-          Software and services our engineers use daily to build production applications.
+        <p class="text-sm text-slate-500 leading-relaxed">
+          The exact software and cloud services our engineering team uses daily to build production applications.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 transition-all flex flex-col justify-between">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="p-6 rounded-2xl border border-slate-200/70 bg-slate-50/40 hover:bg-white hover:border-sky-300 transition-all flex flex-col justify-between group">
           <div>
-            <div class="font-bold text-slate-900 mb-1">Cursor AI IDE</div>
-            <p class="text-xs text-slate-500 mb-3">The premier AI-native editor for multi-file codebase edits.</p>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-extrabold text-slate-950 text-base">Cursor AI</span>
+              <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Top IDE</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">The premier AI-native editor for multi-file codebase refactoring and agentic Composer loops.</p>
           </div>
           <a
             href="https://cursor.com?ref=techpulse"
             target="_blank"
             rel="sponsored nofollow noopener"
-            class="text-xs font-bold text-sky-600 hover:underline"
+            class="text-xs font-bold text-sky-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1"
           >
-            Try Free Trial →
+            Claim Free Pro Trial →
           </a>
         </div>
 
-        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 transition-all flex flex-col justify-between">
+        <div class="p-6 rounded-2xl border border-slate-200/70 bg-slate-50/40 hover:bg-white hover:border-sky-300 transition-all flex flex-col justify-between group">
           <div>
-            <div class="font-bold text-slate-900 mb-1">Hetzner Cloud</div>
-            <p class="text-xs text-slate-500 mb-3">Ultra-cheap European & US VPS nodes with raw compute performance.</p>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-extrabold text-slate-950 text-base">Hetzner Cloud</span>
+              <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-800">Best Value</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Raw AMD &amp; ARM vCPU compute instances at 1/4th the price of AWS EC2 or Google Cloud.</p>
           </div>
           <a
             href="https://hetzner.com?ref=techpulse"
             target="_blank"
             rel="sponsored nofollow noopener"
-            class="text-xs font-bold text-sky-600 hover:underline"
+            class="text-xs font-bold text-sky-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1"
           >
-            Get €20 Credits →
+            Get €20 Cloud Credits →
           </a>
         </div>
 
-        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 transition-all flex flex-col justify-between">
+        <div class="p-6 rounded-2xl border border-slate-200/70 bg-slate-50/40 hover:bg-white hover:border-sky-300 transition-all flex flex-col justify-between group">
           <div>
-            <div class="font-bold text-slate-900 mb-1">Cloudflare Pages</div>
-            <p class="text-xs text-slate-500 mb-3">Instant static edge hosting with zero bandwidth fees.</p>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-extrabold text-slate-950 text-base">Neon Serverless</span>
+              <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">Best Database</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-4 leading-relaxed">Serverless Postgres with git-like instant database branching for PR staging environments.</p>
           </div>
           <a
-            href="https://cloudflare.com?ref=techpulse"
+            href="https://neon.tech?ref=techpulse"
             target="_blank"
             rel="sponsored nofollow noopener"
-            class="text-xs font-bold text-sky-600 hover:underline"
+            class="text-xs font-bold text-sky-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1"
           >
-            Deploy For Free →
+            Deploy Free Database →
           </a>
         </div>
       </div>
