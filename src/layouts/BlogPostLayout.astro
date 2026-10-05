@@ -168,12 +168,13 @@ const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
               </span>
               <span class="text-slate-400 font-normal">{filteredHeadings.length} sections</span>
             </div>
-            <ul class="space-y-2 text-xs text-slate-600 pl-0 list-none m-0 max-h-[50vh] overflow-y-auto pr-2">
+            <ul class="space-y-1 text-xs text-slate-600 pl-0 list-none m-0 max-h-[50vh] overflow-y-auto pr-2" id="toc-list">
               {filteredHeadings.map((h) => (
-                <li class={h.depth === 3 ? 'pl-3 text-slate-500' : 'font-semibold text-slate-800'}>
+                <li class={h.depth === 3 ? 'pl-3' : ''}>
                   <a
                     href={`#${h.slug}`}
-                    class="hover:text-sky-600 transition-colors block py-0.5 truncate"
+                    class="toc-link block py-1.5 px-2.5 rounded-lg border-l-2 border-transparent text-slate-600 hover:text-slate-950 hover:bg-slate-50 transition-all truncate font-medium"
+                    data-slug={h.slug}
                     title={h.text}
                   >
                     {h.depth === 3 ? '↳ ' : '• '} {h.text}
@@ -206,3 +207,43 @@ const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  function setupTocScrollSpy() {
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+    if (!tocLinks.length) return;
+
+    const slugs = Array.from(tocLinks).map((link) => link.dataset.slug).filter(Boolean) as string[];
+    const headingElements = slugs.map((slug) => document.getElementById(slug)).filter(Boolean) as HTMLElement[];
+
+    if (!headingElements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const activeId = entry.target.id;
+            tocLinks.forEach((link) => {
+              if (link.dataset.slug === activeId) {
+                link.classList.add('border-sky-600', 'text-sky-700', 'font-black', 'bg-sky-50');
+                link.classList.remove('border-transparent', 'text-slate-600', 'font-medium');
+              } else {
+                link.classList.remove('border-sky-600', 'text-sky-700', 'font-black', 'bg-sky-50');
+                link.classList.add('border-transparent', 'text-slate-600', 'font-medium');
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: '-80px 0px -70% 0px',
+        threshold: 0,
+      }
+    );
+
+    headingElements.forEach((el) => observer.observe(el));
+  }
+
+  setupTocScrollSpy();
+  document.addEventListener('astro:page-load', setupTocScrollSpy);
+</script>

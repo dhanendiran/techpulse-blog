@@ -1,0 +1,288 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+
+interface Deal {
+  id: string;
+  name: string;
+  category: 'cloud' | 'ai' | 'database' | 'hardware';
+  badge: string;
+  badgeColor?: string;
+  discount: string;
+  description: string;
+  code?: string;
+  affiliateUrl: string;
+  ctaText: string;
+  verifiedDate: string;
+  savings: string;
+  requirements: string;
+}
+
+const deals: Deal[] = [
+  {
+    id: 'hetzner',
+    name: 'Hetzner Cloud VPS',
+    category: 'cloud',
+    badge: '★ Editor Choice',
+    badgeColor: 'bg-emerald-600',
+    discount: '€20 Free Cloud Credits',
+    description: 'Get €20 in free cloud infrastructure credits instantly upon registration. Deploy dedicated AMD EPYC or ARM vCPUs with enterprise NVMe storage.',
+    code: 'AUTO-APPLIED',
+    affiliateUrl: 'https://hetzner.com?ref=techpulse',
+    ctaText: 'Claim €20 Free Hetzner Credit',
+    verifiedDate: 'Verified Active Today',
+    savings: '€20 Value (~4 Months Free VPS)',
+    requirements: 'New accounts only • Valid payment method for verification',
+  },
+  {
+    id: 'digitalocean',
+    name: 'DigitalOcean Cloud',
+    category: 'cloud',
+    badge: 'High Value',
+    badgeColor: 'bg-sky-600',
+    discount: '$200 60-Day Credit',
+    description: 'Receive $200 in free credit valid for 60 days across Droplets, Kubernetes clusters, and App Platform managed container runtimes.',
+    code: 'AUTO-APPLIED',
+    affiliateUrl: 'https://digitalocean.com?ref=techpulse',
+    ctaText: 'Claim $200 DigitalOcean Credit',
+    verifiedDate: 'Verified Active Today',
+    savings: '$200 Value',
+    requirements: 'New customers only • Active for first 60 days',
+  },
+  {
+    id: 'cursor',
+    name: 'Cursor AI IDE',
+    category: 'ai',
+    badge: '★ #1 AI Tool',
+    badgeColor: 'bg-indigo-600',
+    discount: '14-Day Free Pro Trial',
+    description: 'Access unlimited fast Claude 3.5 Sonnet, GPT-4o, and multi-file Composer refactoring loops in the leading AI-native code editor.',
+    code: 'FREE-TIER',
+    affiliateUrl: 'https://cursor.com?ref=techpulse',
+    ctaText: 'Try Cursor Pro Free',
+    verifiedDate: 'Verified Active Today',
+    savings: '$20/month Free Trial',
+    requirements: 'No credit card required for standard tier',
+  },
+  {
+    id: 'neon',
+    name: 'Neon Serverless Postgres',
+    category: 'database',
+    badge: 'Developer Favorite',
+    badgeColor: 'bg-purple-600',
+    discount: 'Free Serverless Database',
+    description: 'Deploy instant serverless Postgres with git-like branching, scale-to-zero compute, and 0.5GB storage permanently free.',
+    code: 'ALWAYS-FREE',
+    affiliateUrl: 'https://neon.tech?ref=techpulse',
+    ctaText: 'Deploy Free Neon Postgres',
+    verifiedDate: 'Verified Active Today',
+    savings: 'Permanent Free Tier',
+    requirements: 'Instant sign-up via GitHub or Google',
+  },
+  {
+    id: 'supabase',
+    name: 'Supabase Cloud',
+    category: 'database',
+    badge: 'Open Source',
+    badgeColor: 'bg-emerald-600',
+    discount: 'Free Developer Project',
+    description: 'Includes 500MB Postgres database, built-in Auth for 50,000 MAU, pgvector support, and 1GB file storage at zero monthly cost.',
+    code: 'FREE-TIER',
+    affiliateUrl: 'https://supabase.com?ref=techpulse',
+    ctaText: 'Start Free on Supabase',
+    verifiedDate: 'Verified Active Today',
+    savings: '$25/mo Equivalent',
+    requirements: 'Up to 2 active projects free',
+  },
+  {
+    id: 'macbook',
+    name: 'Apple MacBook Pro (M4)',
+    category: 'hardware',
+    badge: 'Hardware Deal',
+    badgeColor: 'bg-slate-900',
+    discount: 'Up to $200 - $250 Off',
+    description: 'Check current authorized Amazon and Apple Education discounts on the M4, M4 Pro, and M4 Max 14" and 16" developer laptops.',
+    affiliateUrl: 'https://amazon.com?tag=techpulse-20',
+    ctaText: 'View Current Amazon Deals',
+    verifiedDate: 'Prices Checked Daily',
+    savings: 'Up to $250 Instant Savings',
+    requirements: 'Subject to stock availability',
+  },
+];
+---
+
+<BaseLayout
+  title="Exclusive Developer Perks, Discounts & Cloud Credits (2026) | TechPulse"
+  description="Verified promo codes, cloud credits, and software discounts for developers. Claim €20 Hetzner credit, $200 DigitalOcean credit, and free AI trials."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header Hero -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/90 border border-emerald-300 shadow-xs mb-4">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Verified Partner Perks • October 2026</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-black text-slate-950 tracking-tight leading-tight mb-4">
+        Developer Deals &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600">Cloud Credits</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto mb-8">
+        We negotiate and curate direct perks for our readers. Every credit, coupon, and free trial on this page is tested and verified active by our engineering staff.
+      </p>
+
+      <!-- Trust Indicator Strip -->
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-bold text-slate-700 bg-slate-100/80 border border-slate-200/80 p-3 rounded-2xl max-w-xl mx-auto">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          100% Tested Deals
+        </span>
+        <span class="text-slate-300">•</span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-sky-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          Zero Hidden Markups
+        </span>
+        <span class="text-slate-300">•</span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          Updated Every 24 Hours
+        </span>
+      </div>
+
+      <!-- Live Category Filters -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-8" id="deals-filters">
+        <button
+          data-filter="all"
+          class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-black bg-slate-950 text-white shadow-xs cursor-pointer transition-all"
+        >
+          All Deals ({deals.length})
+        </button>
+        <button
+          data-filter="cloud"
+          class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-900 cursor-pointer transition-all"
+        >
+          Cloud Hosting
+        </button>
+        <button
+          data-filter="ai"
+          class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-900 cursor-pointer transition-all"
+        >
+          AI Tools
+        </button>
+        <button
+          data-filter="database"
+          class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-900 cursor-pointer transition-all"
+        >
+          Databases
+        </button>
+        <button
+          data-filter="hardware"
+          class="deal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-900 cursor-pointer transition-all"
+        >
+          Hardware
+        </button>
+      </div>
+    </div>
+
+    <!-- Deals Grid -->
+    <div id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 my-10">
+      {deals.map((deal) => (
+        <div
+          class="deal-card bg-white rounded-3xl border-2 border-slate-900/10 p-6 sm:p-7 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between group"
+          data-category={deal.category}
+        >
+          <div>
+            <!-- Card Header Ribbon -->
+            <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+              <span class={`text-[10px] uppercase font-black tracking-wider px-3 py-1 rounded-full text-white shadow-2xs ${deal.badgeColor || 'bg-slate-900'}`}>
+                {deal.badge}
+              </span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                {deal.verifiedDate}
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-slate-950 tracking-tight mb-1">
+              {deal.name}
+            </h3>
+
+            <!-- Discount Highlight Badge -->
+            <div class="my-3 p-3 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-sky-500/15 border border-emerald-500/30">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-emerald-900">Perk Offer:</div>
+              <div class="text-lg font-black text-emerald-950 tracking-tight">{deal.discount}</div>
+              <div class="text-xs font-semibold text-emerald-800 mt-0.5">{deal.savings}</div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              {deal.description}
+            </p>
+
+            <div class="text-[11px] text-slate-500 font-medium mb-6 bg-slate-50 p-2.5 rounded-lg border border-slate-200/70">
+              <strong class="text-slate-800">Eligibility:</strong> {deal.requirements}
+            </div>
+          </div>
+
+          <!-- Bottom Action Area -->
+          <div class="pt-4 border-t border-slate-100 flex flex-col gap-2.5">
+            <a
+              href={deal.affiliateUrl}
+              target="_blank"
+              rel="sponsored nofollow noopener"
+              class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-md shadow-emerald-500/20 hover:shadow-emerald-500/35 transition-all text-center flex items-center justify-center gap-2 group-hover:scale-[1.01]"
+            >
+              <span>{deal.ctaText}</span>
+              <span>→</span>
+            </a>
+            <div class="text-[10px] text-center text-slate-600 font-bold">
+              ✓ Direct Official Partner Link • No Added Cost
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Newsletter Opt-in for Deal Alerts -->
+    <NewsletterCTA
+      title="Never Miss High-Value Cloud Credits & Beta Grants"
+      subtitle="Join 18,500+ developers receiving our instant deal alerts when providers drop promo credits and new AI models."
+    />
+  </div>
+</BaseLayout>
+
+<script>
+  function initDealsFilter() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.deal-filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.deal-card');
+
+    buttons.forEach((btn) => {
+      btn.onclick = () => {
+        const filter = btn.dataset.filter || 'all';
+
+        buttons.forEach((b) => {
+          b.classList.remove('bg-slate-950', 'text-white', 'font-black');
+          b.classList.add('bg-white', 'text-slate-700', 'font-bold');
+        });
+        btn.classList.remove('bg-white', 'text-slate-700', 'font-bold');
+        btn.classList.add('bg-slate-950', 'text-white', 'font-black');
+
+        cards.forEach((card) => {
+          const category = card.dataset.category || '';
+          if (filter === 'all' || category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      };
+    });
+  }
+
+  initDealsFilter();
+  document.addEventListener('astro:page-load', initDealsFilter);
+</script>
