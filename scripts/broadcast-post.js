@@ -18,6 +18,21 @@ import { Resend } from 'resend';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Automatically load local .env if present
+const envPath = path.resolve(__dirname, '../.env');
+if (fs.existsSync(envPath)) {
+  const envLines = fs.readFileSync(envPath, 'utf-8').split('\n');
+  for (const line of envLines) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+      const [key, ...rest] = trimmed.split('=');
+      if (!process.env[key.trim()]) {
+        process.env[key.trim()] = rest.join('=').trim();
+      }
+    }
+  }
+}
+
 const slug = process.argv[2]?.trim();
 
 if (!slug) {
