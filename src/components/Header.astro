@@ -68,6 +68,7 @@ const navLinks = [
 
       <a
         href="#newsletter"
+        id="header-subscribe-btn"
         class="inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-white bg-slate-950 rounded-xl hover:bg-sky-600 transition-colors shadow-xs"
       >
         Subscribe Free
@@ -75,3 +76,29 @@ const navLinks = [
     </div>
   </div>
 </header>
+
+<script>
+  function setupSubscribeButton() {
+    const btn = document.getElementById('header-subscribe-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', (e) => {
+      const target = document.getElementById('newsletter');
+      const input = document.getElementById('newsletter-email') as HTMLInputElement | null;
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          if (input) {
+            input.focus();
+            input.classList.add('ring-4', 'ring-sky-400');
+            setTimeout(() => input.classList.remove('ring-4', 'ring-sky-400'), 1500);
+          }
+        }, 500);
+      }
+    });
+  }
+
+  setupSubscribeButton();
+  document.addEventListener('astro:page-load', setupSubscribeButton);
+</script>
