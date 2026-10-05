@@ -86,20 +86,25 @@ const whatsappShare = `https://api.whatsapp.com/send?text=${encodedTitle}%20${en
 </div>
 
 <script>
-  const copyBtn = document.getElementById('copy-link-btn');
-  const copyText = document.getElementById('copy-text');
+  function initCopyButton() {
+    const copyBtn = document.getElementById('copy-link-btn');
+    const copyText = document.getElementById('copy-text');
 
-  if (copyBtn && copyText) {
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        copyText.textContent = 'Copied!';
-        setTimeout(() => {
-          copyText.textContent = 'Copy Link';
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy', err);
-      }
-    });
+    if (copyBtn && copyText) {
+      copyBtn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          copyText.textContent = 'Copied!';
+          setTimeout(() => {
+            copyText.textContent = 'Copy Link';
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy', err);
+        }
+      };
+    }
   }
+
+  initCopyButton();
+  document.addEventListener('astro:page-load', initCopyButton);
 </script>

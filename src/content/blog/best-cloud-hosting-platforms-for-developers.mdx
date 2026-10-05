@@ -73,6 +73,12 @@ In this guide, we evaluate the best cloud infrastructure providers based on real
   price="Starting at €4.50/month (~$5)"
   tagline="The undisputed champion of high-spec VPS hosting"
   description="Hetzner provides AMD EPYC & Ampere ARM dedicated vCPUs with NVMe storage at 1/4th the price of AWS EC2 or Google Cloud Compute Engine. It is our default recommendation for hosting Docker containers, self-hosted databases, and AI inference backends."
+  specs={[
+    { label: "Architecture", value: "AMD EPYC / Ampere ARM" },
+    { label: "Base Bandwidth", value: "20 TB / mo Included" },
+    { label: "Storage", value: "Enterprise PCIe NVMe SSD" },
+    { label: "Data Centers", value: "EU (DE/FI) & US (VA/OR)" }
+  ]}
   pros={[
     "Drastically cheaper than US hyper-scalers (up to 75% savings)",
     "Included 20TB of fast network bandwidth per instance",
@@ -98,6 +104,12 @@ In this guide, we evaluate the best cloud infrastructure providers based on real
   price="Droplets from $4/mo | App Platform Free Tier"
   tagline="Intuitive managed cloud with industry-standard documentation"
   description="For engineers who want simplicity, predictable pricing, and managed PostgreSQL/Redis clusters without AWS IAM labyrinth configuration, DigitalOcean remains the gold standard."
+  specs={[
+    { label: "Compute Type", value: "Shared & Dedicated vCPU" },
+    { label: "Deployment", value: "1-Click App Platform & Git" },
+    { label: "Storage", value: "High IOPS NVMe SSD" },
+    { label: "Data Centers", value: "15 Global Regions" }
+  ]}
   pros={[
     "World-class developer tutorials and documentation",
     "App Platform automates Git-to-deploy for Docker, Node, and Python",

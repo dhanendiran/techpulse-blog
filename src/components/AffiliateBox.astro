@@ -28,70 +28,90 @@ const {
 } = Astro.props;
 ---
 
-<div class="my-10 rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
-  <!-- Top Banner Accent -->
-  <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
-    <div class="flex items-center gap-2">
+<div class="my-10 rounded-3xl border-2 border-slate-900/10 bg-gradient-to-b from-slate-50/60 via-white to-white p-6 sm:p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden ring-1 ring-slate-900/5">
+  <!-- Top Accent Bar: Editor's Badge & Dual Action -->
+  <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/80">
+    <div class="flex flex-wrap items-center gap-2.5">
       {badge && (
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-slate-900 text-white shadow-xs">
-          <span>★</span> {badge}
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider bg-slate-950 text-white shadow-sm ring-1 ring-slate-800">
+          <span class="text-amber-400">★</span> {badge}
         </span>
       )}
-      <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-100">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold text-emerald-800 bg-emerald-100/90 border border-emerald-300/80 shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         Lab Verified 2026
       </span>
     </div>
 
-    <div class="flex items-center gap-4 text-xs">
-      <div>
-        <span class="text-slate-400 font-medium">Editorial Score:</span>
-        <strong class="text-slate-900 font-extrabold text-sm ml-1 text-amber-600">★ {rating}</strong>
+    <!-- Quick Top CTA / Pricing Snapshot -->
+    <div class="flex items-center gap-4 sm:gap-6">
+      <div class="text-right">
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Pricing</div>
+        <div class="text-sm sm:text-base font-extrabold text-slate-950">{price}</div>
       </div>
-      <div class="h-3 w-px bg-slate-200"></div>
-      <div>
-        <span class="text-slate-400 font-medium">Pricing:</span>
-        <strong class="text-emerald-700 font-bold text-sm ml-1">{price}</strong>
-      </div>
+      <a
+        href={affiliateUrl}
+        target="_blank"
+        rel="sponsored nofollow noopener"
+        class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-950 hover:bg-sky-600 text-white text-xs font-black transition-all shadow-xs shrink-0 group"
+      >
+        <span>View Deal</span>
+        <svg class="w-3.5 h-3.5 text-white transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
     </div>
   </div>
 
-  <!-- Product Title & Tagline -->
-  <div class="mb-4">
-    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight m-0">{title}</h3>
-    <p class="text-sm font-semibold text-sky-600 mt-1 mb-0">{tagline}</p>
+  <!-- Title & Rating Line -->
+  <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+    <div>
+      <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight m-0">
+        {title}
+      </h3>
+      {tagline && (
+        <p class="text-sm sm:text-base font-bold text-sky-700 mt-1.5 mb-0 flex items-center gap-1.5">
+          <span>⚡</span> {tagline}
+        </p>
+      )}
+    </div>
+
+    <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-50/90 border border-amber-200/90 shrink-0 self-start shadow-xs">
+      <span class="text-amber-500 text-base leading-none">★</span>
+      <span class="text-xs font-black text-amber-950 tracking-wide">{rating} Editorial Score</span>
+    </div>
   </div>
 
-  <p class="text-slate-600 text-base leading-relaxed mb-6 font-normal">
+  <!-- Editorial Overview -->
+  <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-6 font-normal">
     {description}
   </p>
 
-  <!-- Specs Grid if provided -->
+  <!-- Specs Matrix (RTINGS style) -->
   {specs.length > 0 && (
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 p-4 sm:p-5 rounded-2xl bg-slate-100/80 border border-slate-200/80">
       {specs.map((s) => (
         <div>
-          <span class="text-slate-400 block mb-0.5">{s.label}</span>
-          <strong class="text-slate-800 font-semibold">{s.value}</strong>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">{s.label}</span>
+          <strong class="text-slate-950 font-extrabold text-xs sm:text-sm block">{s.value}</strong>
         </div>
       ))}
     </div>
   )}
 
-  <!-- Pros & Cons Grid (High Contrast Psychology) -->
+  <!-- Pros & Cons Grid (Wirecutter High-Impact UX) -->
   {(pros.length > 0 || cons.length > 0) && (
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
       {pros.length > 0 && (
-        <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100/80">
-          <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5 mb-2.5 m-0">
-            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-            </svg>
-            Key Strengths
+        <div class="bg-emerald-50/80 p-5 rounded-2xl border-2 border-emerald-200/90 shadow-xs">
+          <h4 class="text-xs font-black uppercase tracking-wider text-emerald-950 flex items-center gap-2 mb-3 m-0">
+            <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">✓</span>
+            Key Strengths &amp; Pros
           </h4>
-          <ul class="text-xs space-y-1.5 text-slate-700 pl-0 list-none m-0">
+          <ul class="text-xs sm:text-sm space-y-2 text-slate-800 pl-0 list-none m-0 font-medium">
             {pros.map((pro) => (
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-700 font-extrabold shrink-0 mt-0.5">✓</span>
                 <span class="leading-relaxed">{pro}</span>
               </li>
             ))}
@@ -100,17 +120,15 @@ const {
       )}
 
       {cons.length > 0 && (
-        <div class="bg-rose-50/50 p-4 rounded-2xl border border-rose-100/80">
-          <h4 class="text-xs font-extrabold uppercase tracking-wider text-rose-900 flex items-center gap-1.5 mb-2.5 m-0">
-            <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-            Drawbacks & Caveats
+        <div class="bg-rose-50/80 p-5 rounded-2xl border-2 border-rose-200/90 shadow-xs">
+          <h4 class="text-xs font-black uppercase tracking-wider text-rose-950 flex items-center gap-2 mb-3 m-0">
+            <span class="w-5 h-5 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs">✗</span>
+            Drawbacks &amp; Caveats
           </h4>
-          <ul class="text-xs space-y-1.5 text-slate-700 pl-0 list-none m-0">
+          <ul class="text-xs sm:text-sm space-y-2 text-slate-800 pl-0 list-none m-0 font-medium">
             {cons.map((con) => (
-              <li class="flex items-start gap-2">
-                <span class="text-rose-500 font-bold shrink-0 mt-0.5">✗</span>
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-600 font-extrabold shrink-0 mt-0.5">✗</span>
                 <span class="leading-relaxed">{con}</span>
               </li>
             ))}
@@ -120,22 +138,66 @@ const {
     </div>
   )}
 
-  <!-- CTA Conversion Bar -->
-  <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
-      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-      <span>Tested in lab • Independent recommendation</span>
+  <!-- THE GRAND CONVERSION DOCK (Irresistible Wirecutter / RTINGS psychological close) -->
+  <div class="mt-6 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-6 sm:p-8 text-white shadow-xl border border-slate-800 relative overflow-hidden">
+    <!-- Ambient Glow Accent -->
+    <div class="absolute -right-20 -top-20 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div class="space-y-2.5 max-w-xl">
+        <!-- TRUST BADGE: ULTRA HIGH CONTRAST, GLOWING EMERALD, IMPOSSIBLE TO MISS -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 shadow-xs">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)] animate-pulse"></span>
+          <span>Tested in Lab • Independent Editorial Recommendation</span>
+        </div>
+
+        <div class="text-lg sm:text-xl font-black text-white tracking-tight flex flex-wrap items-center gap-2">
+          <span>Active Offer:</span>
+          <span class="text-emerald-400">{price}</span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed m-0 font-normal">
+          Direct verified partner link. Tested on production developer workloads with zero hidden fees and instant activation.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 text-[11px] text-slate-400 font-semibold pt-1">
+          <span class="flex items-center gap-1 text-slate-300">
+            <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Official Partner Guarantee
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1 text-slate-300">
+            <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            No Hidden Markups
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1 text-slate-300">
+            <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Instant Activation
+          </span>
+        </div>
+      </div>
+
+      <!-- THE MEGA CTA BUTTON: High Conversion, Vibrant Emerald Gradient, Glowing, Unmissable -->
+      <div class="shrink-0 w-full lg:w-auto">
+        <a
+          href={affiliateUrl}
+          target="_blank"
+          rel="sponsored nofollow noopener"
+          class="w-full lg:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-400 hover:from-emerald-300 hover:via-emerald-400 hover:to-teal-300 active:from-emerald-600 active:to-teal-600 text-slate-950 font-black text-base sm:text-lg shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 ring-4 ring-emerald-400/25 transition-all transform hover:-translate-y-1 active:translate-y-0 text-center cursor-pointer group"
+        >
+          <span>{ctaText}</span>
+          <svg class="w-5 h-5 text-slate-950 transition-transform group-hover:translate-x-1.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
     </div>
-    <a
-      href={affiliateUrl}
-      target="_blank"
-      rel="sponsored nofollow noopener"
-      class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white font-bold text-sm shadow-sm hover:shadow-md transition-all group"
-    >
-      <span>{ctaText}</span>
-      <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-      </svg>
-    </a>
   </div>
 </div>

@@ -14,65 +14,85 @@ interface Props {
   items: Item[];
 }
 
-const { title = 'Independent Benchmark Comparison', items = [] } = Astro.props;
+const { title = 'Independent Benchmark Comparison Matrix', items = [] } = Astro.props;
 ---
 
-<div class="my-10 overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-xs">
+<div class="my-10 overflow-hidden rounded-3xl border-2 border-slate-900/10 bg-white shadow-md">
   {title && (
-    <div class="bg-slate-50 px-6 py-4.5 border-b border-slate-200/80 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="text-sky-600 font-bold">📊</span>
-        <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-900 m-0">{title}</h3>
+    <div class="bg-gradient-to-r from-slate-900 to-slate-950 px-6 py-4.5 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 text-white">
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs flex items-center justify-center">
+          📊
+        </span>
+        <h3 class="text-sm sm:text-base font-black uppercase tracking-wider text-white m-0">{title}</h3>
       </div>
-      <span class="text-[11px] text-slate-400 font-medium">Scroll horizontally →</span>
+      <div class="flex items-center gap-2 text-xs text-slate-300 font-semibold bg-white/10 px-3 py-1 rounded-full border border-white/10">
+        <span>👈 Swipe horizontally to compare 👉</span>
+      </div>
     </div>
   )}
 
   <div class="overflow-x-auto">
     <table class="w-full text-left border-collapse text-sm">
       <thead>
-        <tr class="border-b border-slate-200/80 bg-slate-50/50 text-[11px] uppercase tracking-wider text-slate-500 font-bold">
+        <tr class="border-b-2 border-slate-200 bg-slate-100/90 text-xs uppercase tracking-wider text-slate-800 font-black">
           <th class="py-4 px-5">Platform / Tool</th>
-          <th class="py-4 px-4">Score</th>
-          <th class="py-4 px-5">Best For</th>
-          <th class="py-4 px-4">Pricing</th>
-          <th class="py-4 px-5 text-right">Verdict</th>
+          <th class="py-4 px-4 whitespace-nowrap">Lab Score</th>
+          <th class="py-4 px-5">Best For Workload</th>
+          <th class="py-4 px-4 whitespace-nowrap">Tested Pricing</th>
+          <th class="py-4 px-5 text-right whitespace-nowrap">Direct Action</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-100">
-        {items.map((item, index) => (
-          <tr class={index === 0 ? 'bg-sky-50/25 hover:bg-sky-50/40 transition-colors' : 'hover:bg-slate-50/70 transition-colors'}>
-            <td class="py-4.5 px-5 font-bold text-slate-950">
-              <div class="flex items-center gap-2.5">
-                <span class="text-sm">{item.name}</span>
-                {item.badge && (
-                  <span class="text-[10px] uppercase font-black tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 border border-sky-200 shrink-0">
-                    {item.badge}
-                  </span>
-                )}
-              </div>
-            </td>
-            <td class="py-4.5 px-4 font-bold text-slate-900 whitespace-nowrap">
-              <span class="text-amber-500">★</span> {item.rating}
-            </td>
-            <td class="py-4.5 px-5 text-slate-600 text-xs leading-relaxed max-w-xs">
-              {item.bestFor}
-            </td>
-            <td class="py-4.5 px-4 font-bold text-emerald-700 text-xs whitespace-nowrap">
-              {item.pricing}
-            </td>
-            <td class="py-4.5 px-5 text-right whitespace-nowrap">
-              <a
-                href={item.link}
-                target="_blank"
-                rel="sponsored nofollow noopener"
-                class="inline-block px-4 py-2 text-xs font-bold rounded-xl bg-slate-900 hover:bg-sky-600 text-white transition-all shadow-xs"
-              >
-                {item.ctaText || 'Check Deal'} →
-              </a>
-            </td>
-          </tr>
-        ))}
+        {items.map((item, index) => {
+          const isWinner = index === 0;
+          return (
+            <tr class={isWinner ? 'bg-emerald-50/40 hover:bg-emerald-50/60 transition-colors' : 'hover:bg-slate-50/80 transition-colors'}>
+              <td class="py-4.5 px-5 font-extrabold text-slate-950">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-sm font-black text-slate-950">{item.name}</span>
+                  {item.badge ? (
+                    <span class={`text-[10px] uppercase font-black tracking-wider px-2.5 py-1 rounded-full shrink-0 shadow-2xs ${
+                      isWinner 
+                        ? 'bg-emerald-600 text-white border border-emerald-700' 
+                        : 'bg-slate-900 text-white border border-slate-800'
+                    }`}>
+                      {isWinner ? `🏆 ${item.badge}` : item.badge}
+                    </span>
+                  ) : isWinner ? (
+                    <span class="text-[10px] uppercase font-black tracking-wider px-2.5 py-1 rounded-full bg-emerald-600 text-white shrink-0">
+                      🏆 #1 Choice
+                    </span>
+                  ) : null}
+                </div>
+              </td>
+              <td class="py-4.5 px-4 font-black text-slate-950 whitespace-nowrap">
+                <span class="text-amber-500 text-base leading-none">★</span> <span class="text-sm">{item.rating}</span>
+              </td>
+              <td class="py-4.5 px-5 text-slate-700 text-xs sm:text-sm font-medium leading-relaxed max-w-xs">
+                {item.bestFor}
+              </td>
+              <td class="py-4.5 px-4 font-extrabold text-emerald-800 text-xs sm:text-sm whitespace-nowrap">
+                {item.pricing}
+              </td>
+              <td class="py-4.5 px-5 text-right whitespace-nowrap">
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="sponsored nofollow noopener"
+                  class={`inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-black rounded-xl transition-all shadow-xs ${
+                    isWinner
+                      ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 shadow-md ring-2 ring-emerald-400/30'
+                      : 'bg-slate-950 hover:bg-sky-600 text-white hover:shadow-md'
+                  }`}
+                >
+                  <span>{item.ctaText || 'Check Deal'}</span>
+                  <span>→</span>
+                </a>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </div>

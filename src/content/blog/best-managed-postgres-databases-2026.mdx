@@ -64,6 +64,12 @@ We stress-tested four top managed PostgreSQL providers with 10,000 concurrent da
   price="Generous Free Tier / $19/mo Pro"
   tagline="The fastest serverless Postgres with git-like database branching"
   description="Neon separates compute and storage on top of custom Rust pageservers, enabling instant copy-on-write database branches for PR preview environments and zero-compute sleep states."
+  specs={[
+    { label: "Architecture", value: "Decoupled Storage (Rust)" },
+    { label: "Branching Speed", value: "< 2s Instant Branch" },
+    { label: "Autoscaling", value: "Scale to Zero Compute" },
+    { label: "Extensions", value: "pgvector, PostGIS & more" }
+  ]}
   pros={[
     "Branch your entire production database in under 2 seconds for staging tests",
     "Scale compute to zero when idle to save hosting budget",
@@ -87,6 +93,12 @@ We stress-tested four top managed PostgreSQL providers with 10,000 concurrent da
   price="Free Tier / $25/mo Pro"
   tagline="Full Postgres power bundled with Auth, Storage, and Realtime sync"
   description="Supabase gives you a dedicated Postgres database paired with auto-generated REST APIs, Row Level Security (RLS), and native vector search capabilities."
+  specs={[
+    { label: "Core Database", value: "Dedicated PostgreSQL 16" },
+    { label: "Included Suite", value: "Auth, Storage & Realtime" },
+    { label: "AI Support", value: "Native pgvector pre-installed" },
+    { label: "APIs", value: "Auto REST & GraphQL" }
+  ]}
   pros={[
     "Built-in pgvector extension for seamless AI RAG pipelines",
     "Instant table UI and SQL editor with AI assistance",

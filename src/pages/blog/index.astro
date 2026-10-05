@@ -94,52 +94,82 @@ const categories = Array.from(new Set(allPosts.map((p) => p.data.category)));
 </BaseLayout>
 
 <script>
-  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
-  const postItems = document.querySelectorAll<HTMLElement>('.post-item');
-  const catButtons = document.querySelectorAll<HTMLButtonElement>('.cat-filter-btn');
-  const noResults = document.getElementById('no-results');
+  function initBlogFilters() {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const postItems = document.querySelectorAll<HTMLElement>('.post-item');
+    const catButtons = document.querySelectorAll<HTMLButtonElement>('.cat-filter-btn');
+    const noResults = document.getElementById('no-results');
 
-  let activeCategory = 'all';
+    let activeCategory = 'all';
 
-  function filterPosts() {
-    const query = searchInput?.value.toLowerCase().trim() || '';
-    let visibleCount = 0;
+    function filterPosts() {
+      const query = searchInput?.value.toLowerCase().trim() || '';
+      let visibleCount = 0;
 
-    postItems.forEach((item) => {
-      const title = item.dataset.title || '';
-      const desc = item.dataset.description || '';
-      const tags = item.dataset.tags || '';
-      const category = item.dataset.category || '';
+      postItems.forEach((item) => {
+        const title = item.dataset.title || '';
+        const desc = item.dataset.description || '';
+        const tags = item.dataset.tags || '';
+        const category = item.dataset.category || '';
 
-      const matchesQuery = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
-      const matchesCategory = activeCategory === 'all' || category === activeCategory;
+        const matchesQuery = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
+        const matchesCategory = activeCategory === 'all' || category.toLowerCase() === activeCategory.toLowerCase();
 
-      if (matchesQuery && matchesCategory) {
-        item.style.display = '';
-        visibleCount++;
-      } else {
-        item.style.display = 'none';
+        if (matchesQuery && matchesCategory) {
+          item.style.display = '';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (noResults) {
+        noResults.classList.toggle('hidden', visibleCount > 0);
       }
-    });
-
-    if (noResults) {
-      noResults.classList.toggle('hidden', visibleCount > 0);
     }
+
+    // Handle URL parameters (e.g. ?category=Cloud+%26+DevOps or ?q=Hetzner)
+    const params = new URLSearchParams(window.location.search);
+    const catParam = params.get('category');
+    const qParam = params.get('q');
+
+    if (qParam && searchInput) {
+      searchInput.value = qParam;
+    }
+
+    if (catParam) {
+      activeCategory = catParam;
+      catButtons.forEach((b) => {
+        const btnCat = b.dataset.category || '';
+        if (btnCat.toLowerCase() === catParam.toLowerCase()) {
+          b.classList.remove('bg-white', 'text-slate-700', 'font-medium');
+          b.classList.add('bg-slate-900', 'text-white', 'font-bold');
+        } else {
+          b.classList.remove('bg-slate-900', 'text-white', 'font-bold');
+          b.classList.add('bg-white', 'text-slate-700', 'font-medium');
+        }
+      });
+    }
+
+    filterPosts();
+
+    searchInput?.addEventListener('input', filterPosts);
+
+    catButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        catButtons.forEach((b) => {
+          b.classList.remove('bg-slate-900', 'text-white', 'font-bold');
+          b.classList.add('bg-white', 'text-slate-700', 'font-medium');
+        });
+        btn.classList.remove('bg-white', 'text-slate-700', 'font-medium');
+        btn.classList.add('bg-slate-900', 'text-white', 'font-bold');
+
+        activeCategory = btn.dataset.category || 'all';
+        filterPosts();
+      });
+    });
   }
 
-  searchInput?.addEventListener('input', filterPosts);
-
-  catButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      catButtons.forEach((b) => {
-        b.classList.remove('bg-slate-900', 'text-white', 'font-bold');
-        b.classList.add('bg-white', 'text-slate-700', 'font-medium');
-      });
-      btn.classList.remove('bg-white', 'text-slate-700', 'font-medium');
-      btn.classList.add('bg-slate-900', 'text-white', 'font-bold');
-
-      activeCategory = btn.dataset.category || 'all';
-      filterPosts();
-    });
-  });
+  initBlogFilters();
+  document.addEventListener('astro:page-load', initBlogFilters);
 </script>
